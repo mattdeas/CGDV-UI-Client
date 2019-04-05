@@ -1,0 +1,45 @@
+<!-- Reset Password -->
+    <section class="log-in signup-sec ms2">
+      <div class="container g-py-100">
+        <div class="row justify-content-center">
+          <div class="col-sm-8 col-lg-5">
+            <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+              <header class="text-center mb-4">
+                <h2 class="h2 g-color-black g-font-weight-400">Reset password</h2>
+              </header>
+
+              <!-- Form -->
+              <form class="g-py-15" name="form" (ngSubmit)="f.form.valid && onSubmit(f.form.value, f.form.valid)"  #f="ngForm" novalidate>                
+                
+
+                <div class="g-mb-30">
+                  <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Password:</label>
+                  <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15 mb-3" type="password" ngModel name="password" #password="ngModel" placeholder="********" minlength="8" required [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"/>                    
+                  <div class="invalid-feedback" *ngIf="f.submitted && password.invalid">
+                    <p *ngIf="password?.errors?.required">Password is required.</p>
+                    <p *ngIf="password.errors?.minlength">Password must be at least 8 characters</p>
+                  </div> 
+                </div>
+
+                <div class="g-mb-30">
+                  <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Confirm Password:</label>
+                  <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15 mb-3" type="password" ngModel name="confirm_password" #confirm_password="ngModel" [equalTo]="password" placeholder="********" required [ngClass]="{ 'is-invalid': f.submitted && confirm_password.invalid }"/>                    
+                    <div class="invalid-feedback" *ngIf="f.submitted && confirm_password.invalid">
+                    <p *ngIf="confirm_password?.errors?.required">Confirm Password is required.</p>
+                       <p *ngIf="confirm_password.errors?.equalTo && !confirm_password.errors?.required">
+                        Password does not match the confirm password.
+                      </p>
+                  </div> 
+                </div>
+
+                <div class="text-center mb-5">
+                  <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit" >Submit</button>
+                </div>
+              </form>
+              <!-- End Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Reset Password-->

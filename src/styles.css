@@ -1,0 +1,21 @@
+ /* @import "assets/vendor/bootstrap/bootstrap.min.css";
+  @import "assets/vendor/icon-awesome/css/font-awesome.min.css";
+  @import "assets/vendor/icon-line/css/simple-line-icons.css";
+  @import "assets/vendor/icon-etlinefont/style.css";
+  @import "assets/vendor/icon-line-pro/style.css";
+  @import "assets/vendor/icon-hs/style.css";
+  @import "assets/vendor/animate.css";
+  @import "assets/vendor/slick-carousel/slick/slick.css";
+  @import "assets/vendor/typedjs/typed.css";
+  @import "assets/vendor/hs-megamenu/src/hs.megamenu.css";
+  @import "assets/vendor/hamburgers/hamburgers.min.css";
+  @import "assets/css/unify-core.css";*/
+  /*@import "assets/css/unify-components.css";*/
+  /*@import "assets/css/unify-globals.css";*/
+  /*@import "assets/css/styles.multipage-education.css";*/
+  /*@import "assets/css/styles.op-real-estate.css";*/
+  /*@import "assets/css/custom.css";*/
+
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';

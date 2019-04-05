@@ -1,0 +1,37 @@
+<div class="text-center mb-5" *ngIf="commentscount >0 ">
+    <button class="btn btn-block u-btn-primary rounded g-py-13" (click)="setVisibility()">{{hideShowText}} comments ({{commentscount}})</button>
+    
+</div>
+<div  style="height: 250px;overflow-y: scroll;" *ngIf="isVisible && commentscount >0 ">
+        
+    <div *ngFor="let comment of comments">
+        <div class="comment-container">
+            <div class="flex">
+                <div class="col created-at" style="float: right;text-align: right;width: 65%;"> {{comment.created_at}}</div>
+                <div class="media-body">
+                    <div class="g-width-30 g-height-30 float-left">
+                      <img class="img-fluid g-brd-around g-brd-2 g-brd-white rounded-circle" src="{{baseUrl}}{{comment.avatar}}" alt="Image Description">
+                    </div>
+                    <a href="bio/{{comment.user_id}}"><h5 class="h6 g-color-primary g-pt-5 g-pl-10 g-font-primary g-font-size-12 g-font-weight-400 float-left">{{comment.firstname}} {{comment.lastname}}</h5></a>
+                  </div>
+                
+            </div>
+            <div class="comment margin-comment" style="padding-left: 10%;">{{comment.commenttext}}</div>
+            <div style="float: right;text-align: right;width: 60%;">
+                <a *ngIf="(comment.user_id == user_id) " (click)="setEditTextComment(comment.id,comment.commenttext)"><img src="assets/custom-img/comment-edit.png" /> Edit 
+                </a>
+                <a *ngIf="(comment.user_id == user_id) || (comment.vizcreator_id == user_id) " (click)="delComment(comment.id)"><img src="assets/custom-img/delete.png" /> Delete </a>
+                </div>
+        </div>
+        <hr />
+    </div>
+</div>
+
+<div class="btn-block" *ngIf="loggedin!=null">
+    <!---py-15 g-px-15" name="title" id="title" placeholder="Title" [(ngModel)]="model.title" #title="ngModel"  />-->
+    <textarea id="commentText" [(ngModel)]="commentText" 
+            style="width:100%; padding-top: 5px"></textarea>
+        <button class="btn u-btn-primary rounded g-py-13" 
+        style="float: right" (click)="AddEditComment()" >
+        <img style="max-width: 10%;" src="assets/custom-img/plus-circle.png"> {{addsave}} Comment </button>
+</div>

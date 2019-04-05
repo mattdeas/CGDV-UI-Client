@@ -1,0 +1,167 @@
+<!-- Recommend -->
+<section class="g-pos-rel g-pt-50 g-pb-30 main-slider ms2" *ngIf="!fromSearch">
+  <div class="container">
+    <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+      <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Featured Viz</h2>
+    </div>
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+      <div ngxSlickItem *ngFor="let item of featuredList" class="slide">
+        <article class="row g-bg-white mx-0">
+          <div class="col-md-7 col-lg-7 g-bg-size-cover w-h-o-custm" [style.background-image]="'url(' + baseUrl + item.avatar + ')'"></div>
+          <div class="col-md-5 col-lg-5 g-pa-30 text-center g-bgcolor-green">
+            <h4 class="h3 g-font-weight-300 g-mb-20">
+                           <a class="ttl g-color-white g-font-size-26 g-font-weight-500" [routerLink]="['/visual']" [queryParams]="{id: item.id}">{{item?.title}}</a>
+                        </h4>
+            <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.user_avatar}}" alt="Image Description">
+            <a href="/bio/{{item.user_id}}"><span class="d-block g-color-white g-font-size-17 g-mb-20">{{item?.username}}</span></a>
+            <ul class="g-color-white list-inline g-font-size-12 g-mb-5 g-bottom-20 g-pos-abs g-left-minus-50 g-right-minus-50">
+              <li class="list-inline-item">
+                <i class="fa fa-heart g-pos-rel g-top-1 g-mr-2" (click)="upvoteFL(item)" ></i> {{item?.upvote}}
+                <!--<button class="btn btn-link float-right text-right g-bor-t-1 upvote-btn" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" [disabled]="item.upvoted"><i class="fa fa-heart" aria-hidden="true"></i> {{item?.upvote}}</button>-->
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+</section>
+<!-- End Recommend -->
+<section class="g-pt-30 g-pb-70 img-portfolio">
+  <div class="container">
+    <div class="row text-center g-mb-60"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="float-right search">
+          <form id="searchform-1" class="input-group u-shadow-v19 g-brd-primary--focus g-rounded-20" #form="ngForm" novalidate (ngSubmit)="sorts= []; applyFilter = true; applySorting = false; getVisualList(1, form.value,'', applyFilter, applySorting)">
+            <input class="form-control " type="text" placeholder="Search here ..." ngModel name="title" #title="ngModel">
+            <button class="btn input-group-addon d-flex align-items-center g-brd-none g-color-white g-bg-primary g-bg-primary-light-v1--hover g-font-size-15 g-rounded-right-20 g-transition-0_2" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <ul class="nav nav-tabs u-filter-v1 g-mb-20 pt-2">
+          <li class="list-inline-item cbp-filter-item g-cursor-pointer g-transition-0_2 cbp-filter-item-active"><a (click)="sorts= []; applyFilter = false; applySorting = true; getVisualList(1, form.value,'Created_At', applyFilter, applySorting)" data-toggle="tab" class="active">Latest Uploaded</a></li>
+          <li class="list-inline-item cbp-filter-item g-cursor-pointer g-transition-0_2 cbp-filter-item-active fa fa-heart"><a (click)="sorts= []; applyFilter = false; applySorting = true; getVisualList(1, form.value,'upvote', applyFilter, applySorting)" data-toggle="tab" class="active">Upvote</a></li>
+          <li class="list-inline-item cbp-filter-item g-cursor-pointer g-transition-0_2">
+          <!-- <a (click)="sorts= []; applyFilter = true; applySorting = false; getVisualList(1, form.value,'', applyFilter, applySorting)" data-toggle="tab">University</a> -->
+          <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded " name="university_id" [(ngModel)]="model.university_id" (change)="sorts= []; model.country_id = undefined; applyFilter = true; applySorting = false; getVisualList(1, model,'', applyFilter, applySorting)">
+                  <option [ngValue]="undefined" selected="">Select University or Organization</option>                  
+                  <option *ngFor="let uni of universityList;" [ngValue]="uni.id">
+                    {{ uni.name }}
+                  </option>
+                </select>
+          </li>
+          <li class="list-inline-item cbp-filter-item g-cursor-pointer g-transition-0_2">
+            <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded " name="country_id"  [(ngModel)]="model.country_id" #country_id="ngModel" (change)="sorts= []; model.university_id=undefined; applyFilter = true; applySorting = false; getVisualList(1, model,'', applyFilter, applySorting)">
+                  <option [ngValue]="undefined" selected="">Select Country</option>
+                  <option *ngFor="let co of countryList;" [ngValue]="co.id">
+                    {{ co.name }}
+                  </option>
+                </select>
+          </li>
+          <li class="list-inline-item cbp-filter-item g-cursor-pointer g-transition-0_2">
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded " name="challenge_id"  [(ngModel)]="model.challenge_id" #challenge_id="ngModel" (change)="sorts= []; model.university_id=undefined; model.country_id=undefined; applyFilter = true; applySorting = false; getVisualList(1, model,'', applyFilter, applySorting)">
+                    <option [ngValue]="undefined" selected="">Select Challenge</option>
+                    <option *ngFor="let ch of challengeList;" [ngValue]="ch.id">
+                      {{ ch.challenge_name }}
+                    </option>
+                  </select>
+            </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab1">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent=".tab-pane" href="#collapseOne">
+                          Tab 1
+                        </a>
+                      </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-sm-6 col-lg-3" *ngFor="let item of rows">
+                      <div class="card p-2 mt-3 mb-3">
+                        <div class="card-image">
+                          <img class="img-responsive" src="{{baseUrl}}{{item.avatar}}">
+                        </div>
+                        <div class="card-footer pr-0 pb-1 g-bg-white">
+                          <div class="d-flex mr-3">
+                            <a class="d-block g-color-black  g-font-size-14 mb-2" [routerLink]="['/visual']" [queryParams]="{id: item.id}" >{{item?.title}}</a>
+                          </div>
+                          <div class="media-body">
+                            <div class="g-width-30 g-height-30 float-left">
+                              <img class="img-fluid g-brd-around g-brd-2 g-brd-white rounded-circle" src="{{baseUrl}}{{item?.user_avatar}}" alt="Image Description">
+                            </div>
+                            <a href="bio/{{item.user_id}}"><h5 class="h6 g-color-primary g-pt-5 g-pl-10 g-font-primary g-font-size-12 g-font-weight-400 float-left">- {{item?.username}} </h5></a>
+                          </div>
+                        </div>
+                        <!-- <a href="javascript:void(0)" class="float-right text-right g-bor-t-1" *ngIf='!global.isLoggedIn'><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</a> -->
+                        <div><img src="assets/custom-img/certificate-16.png" style="width:10%" title="Top Contributor" alt="Top Contributor" *ngIf="item.topcontrib > 0" />
+                        <img src="assets/custom-img/trophy-16.png" style="width:10%" title="Viz-a-thon Winner" alt="Viz-a-thon Winner"  *ngIf="item.winner > 0" />
+                        <img src="assets/custom-img/runner-up-16.png" style="width:10%" title="Viz-a-thon Runner Up" alt="Viz-a-thon Runner-Up"  *ngIf="item.runnerup > 0" />
+                      </div>
+                        
+                        <button class="btn btn-link float-right text-right g-bor-t-1 upvote-btn" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" [disabled]="item.upvoted"><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</button>
+                        <!-- <a href="javascript:void(0)" class="float-right text-right g-bor-t-1" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" ><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</a> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <!-- pager -->
+                    <ul *ngIf="pager.pages && pager.pages.length > 1" class="pagination">
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a class="page-link"  (click)="getVisualList(1)">First</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                            <a class="page-link"  (click)="getVisualList(pager.currentPage - 1)">Previous</a>
+                        </li>
+                        <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                            <a class="page-link"  (click)="getVisualList(page)">{{page}}</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a class="page-link"  (click)="getVisualList(pager.currentPage + 1)">Next</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                            <a class="page-link"  (click)="getVisualList(pager.totalPages)">Last</a>
+                        </li>
+                    </ul>
+                  </div>                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="g-pos-rel g-pt-50 g-pb-30 main-slider ms2" *ngIf="fromSearch">
+  <div class="container">
+    <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+      <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Featured Viz</h2>
+    </div>
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+      <div ngxSlickItem *ngFor="let item of featuredList" class="slide">
+        <article class="row g-bg-white mx-0">
+          <div class="col-md-7 col-lg-7 g-bg-size-cover w-h-o-custm" [style.background-image]="'url(' + baseUrl + item.avatar + ')'"></div>
+          <div class="col-md-5 col-lg-5 g-pa-30 text-center g-bgcolor-green">
+            <h4 class="h3 g-font-weight-300 g-mb-20">
+                           <a class="ttl g-color-white g-font-size-26 g-font-weight-500" [routerLink]="['/visual']" [queryParams]="{id: item.id}">{{item?.title}}</a>
+                        </h4>
+            <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.user_avatar}}" alt="Image Description">
+            <span class="d-block g-color-white g-font-size-17 g-mb-20">{{item?.username}}</span>
+            <ul class="g-color-white list-inline g-font-size-12 g-mb-5 g-bottom-20 g-pos-abs g-left-minus-50 g-right-minus-50">
+              <li class="list-inline-item">
+                <i class="fa fa-heart g-pos-rel g-top-1 g-mr-2"></i> {{item?.upvote}}
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+</section>

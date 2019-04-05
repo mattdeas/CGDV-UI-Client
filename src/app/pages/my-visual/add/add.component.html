@@ -1,0 +1,203 @@
+<section class="signup-sec ms2 g-pt-100 g-mb-100">
+  <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center g-width-100x--lg">
+      <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">{{page_title}}</h2>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="flex-md-unordered align-self-center add-visual-form">
+        <div class="u-shadow-v21 g-bg-white rounded g-pa-50 float-left">
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()"  #f="ngForm" novalidate>
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="title" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Visualization Title</label>
+              <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="title" id="title" placeholder="Title" [(ngModel)]="model.title" #title="ngModel" [ngClass]="{ 'is-invalid': f.submitted && title.invalid }" required />
+              <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+                <div *ngIf="title.errors?.required">Visualization Title is required</div>
+              </div>
+          </div>
+
+          <!-- <div class="col-sm-6 g-mb-30 float-left">
+            <label for="author" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Author</label>
+              <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="author" id="author" placeholder="Author" [(ngModel)]="model.author" #author="ngModel" [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
+              <div *ngIf="f.submitted && author.invalid" class="invalid-feedback">
+                <div *ngIf="author.errors?.required">Author is required</div>
+              </div>
+          </div>        -->  
+
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="country_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Visualization Country</label>
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="country_id"  [(ngModel)]="model.country_id" #country_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && country_id.invalid }" >
+                <option [ngValue]="undefined" selected="">Select Country</option>
+                <option *ngFor="let co of countryList;" [ngValue]="co.id">
+                  {{ co.name }}
+                </option>
+              </select>
+              <div *ngIf="f.submitted && country_id.invalid" class="invalid-feedback">
+                <div *ngIf="country_id.errors?.required">Visualization Country is required</div>
+              </div>
+          </div>
+
+          
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="university_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">University or Organization</label>
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="university_id" [(ngModel)]="model.university_id" (change)="onUniChange($event)" #university_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && university_id.invalid }" >
+                <option [ngValue]="undefined" selected="">Select University or Organization</option>
+                <option *ngFor="let uni of universityList;" [ngValue]="uni.id">
+                  {{ uni.name }}
+                </option>
+                <option value="add_new">Other…</option>
+              </select>
+              <div *ngIf="f.submitted && university_id.invalid" class="invalid-feedback">
+                <div *ngIf="university_id.errors?.required">University is required</div>
+              </div>
+          </div>
+
+          
+
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="category_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Category</label>
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="category_id" [(ngModel)]="model.category_id" #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }" >
+                <option [ngValue]="undefined" selected="">Select Category</option>
+                <option *ngFor="let cat of categoryList" [ngValue]="cat.id">
+                  {{ cat.name }}
+                </option>
+              </select>
+              <div *ngIf="f.submitted && category_id.invalid" class="invalid-feedback">
+                <div *ngIf="category_id.errors?.required">Category is required</div>
+              </div>
+          </div>
+
+          <div class="col-sm-6 g-mb-30 float-left">
+              <label for="challenge_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Challenge</label>
+                <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="challenge_id"  [(ngModel)]="model.challenge_id" #challenge_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted  }" >
+                  <option [ngValue]="undefined" selected="">Select Challenge</option>
+                  <option *ngFor="let ch of challengeList;" [ngValue]="ch.id">
+                    {{ ch.challenge_name }}
+                  </option>
+                </select>
+          </div>
+
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="data_src" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Data Source</label>
+              <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="data_src" id="data_src" placeholder="Data Source" [(ngModel)]="model.data_src" #data_src="ngModel" [ngClass]="{ 'is-invalid': f.submitted && data_src.invalid }" />
+              <div *ngIf="f.submitted && data_src.invalid" class="invalid-feedback">
+                <div *ngIf="data_src.errors?.required">Data Source is required</div>
+              </div>
+          </div>
+
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="tags" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Tags</label>
+              <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="tags" id="tags" placeholder="Add tags by comma seperated e.g. tag1,tag2" [(ngModel)]="model.tags" #tags="ngModel">
+              </textarea>
+          </div>
+
+          <div class="col-sm-12 g-mb-30 float-left">
+            <label for="embed_code" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Embed Code</label>
+              <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="embed_code" id="embed_code" placeholder="Add Embed Code" [(ngModel)]="model.embed_code" #embed_code="ngModel">
+              </textarea>
+          </div>
+
+          <div class="col-sm-12 g-mb-30 float-left">
+            <label for="description" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Description</label>
+              <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="description" id="description" placeholder="Add Description" [(ngModel)]="model.description" #description="ngModel">
+              </textarea>
+          </div>
+
+          <div class="col-sm-12 g-mb-30 float-left">
+            <input type="checkbox" name="comments" id="comments"  [(ngModel)]="model.comments" #comments="ngModel" /> 
+            <label for="comments" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Allow Comments</label>
+            
+            <!--<textarea class="form-control g-color-black g-bg-white g-bg-white--focus
+             g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="comments" id="comments" [(ngModel)]="model.comments" #description="ngModel">
+              </textarea>-->
+          </div>
+
+          <div class="col-sm-12 float-left" >
+            <div class="col-sm-12 float-left upload-img form-group row" *ngIf="model.avatar && !changeImageFlag">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Picture</label>
+                <img src="{{API_URL}}{{model.avatar}}">
+            </div>
+
+            <div class="col-sm-12 g-mb-30 float-left">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13"></label>
+                <button  type="button" class="btn btn-primary mr-1 mb-1 " (click)="changeImage()" [hidden]="!model.avatar || changeImageFlag">Change</button>
+                <button  type="button" class="btn btn-primary mr-1 mb-1 " (click)="removeImage() " [hidden]="!model.avatar || changeImageFlag">Remove</button>
+            </div>
+
+            <div class="g-mb-30" *ngIf="changeImageFlag || !model.avatar">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Picture</label>
+                <input type="file" (change)="changeListener($event)" >
+            </div>
+            <div class="upload-img form-group row" *ngIf="image">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13"></label>
+                <img  src="{{image}}">
+            </div>    
+            <div class="float-left">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13"></label>
+              <button type="button" class="btn btn-primary mr-1 mb-1 " (click)="UploadImage() " [hidden]="!image " [disabled]="disableFlag ">Upload</button>
+              <button type="button " class="btn btn-primary mr-1 mb-1 " (click)="removeImage() " [hidden]="!image">Remove</button>
+            </div>
+            <div [hidden]="!uploading">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Please wait while uploading…</label>
+            </div>
+          </div>
+          
+          
+          
+
+          <div class="col-sm-12 float-left">
+              <button type="submit" class="btn u-btn-primary rounded g-py-13 col-xs-12 col-sm-3 g-mr-20" >Submit</button>
+              <button type="submit" class="btn u-btn-primary rounded g-py-13 col-xs-12 col-sm-3" [routerLink]="['/my-visual/list']">Cancel</button>
+          </div>
+        </form>
+          <!-- End Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Start Add University Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add University or Organization</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="flex-md-unordered align-self-center add-visual-form">
+            <div class="u-shadow-v21 g-bg-white rounded g-pa-40 ">
+              <!-- Form -->
+              <form class="g-py-15" name="form" (ngSubmit)="f1.form.valid && add_uni(f1)" #f1="ngForm" novalidate>
+                <!-- <div class="g-mb-30 col-sm-6">
+                  <label for="country_id_1" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Country</label>
+                  <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="country_id" [(ngModel)]="add_uni_model.country_id" #country_id_1="ngModel" [ngClass]="{ 'is-invalid': f1.submitted && country_id_1.invalid }" required="">
+                    <option [ngValue]="undefined" selected="">Select Country</option>
+                    <option *ngFor="let co of countryList;" [ngValue]="co.id">
+                      {{ co.name }}
+                    </option>
+                  </select>
+                  <div *ngIf="f1.submitted && country_id_1.invalid" class="invalid-feedback">
+                    <div *ngIf="country_id_1.errors?.required">Country is required</div>
+                  </div>
+                </div> -->
+                <div class="g-mb-30 col-sm-6">
+                  <label for="name" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">University or Organization Name</label>
+                  <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="name" id="name" placeholder="Name" [(ngModel)]="add_uni_model.name" #name="ngModel" [ngClass]="{ 'is-invalid': f1.submitted && name.invalid }" required />
+                  <div *ngIf="f1.submitted && name.invalid" class="invalid-feedback">
+                    <div *ngIf="name.errors?.required">University or Organization Name is required</div>
+                  </div>
+                </div>
+                <div class="text-center mb-5">
+                  <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit">Submit</button>
+                </div>
+              </form>
+              <!-- End Form -->
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+  <!-- End Add University Modal -->
+</section>
+

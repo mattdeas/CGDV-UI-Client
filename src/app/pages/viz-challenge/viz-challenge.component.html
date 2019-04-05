@@ -1,0 +1,237 @@
+<div class="wrapper" *ngFor="let item of rows">
+    <div  *ngIf="item.openclose" class="ribbon-wrapper-green">
+      <div class="ribbon-green" >ACTIVE</div></div>
+    <div *ngIf="!item.openclose" class="ribbon-wrapper-green">      
+      <div  class="ribbon-red" >CLOSED</div>
+    </div>
+    <div style="font-size:25px;text-align: center"><strong>{{item.challenge_name}}</strong></div>
+    <div style="text-align: right;padding-right: 5%;">Active From <strong>{{item.start}}</strong> to <strong>{{item.end}}</strong></div>
+    <!--<div class="square"><img  style="max-width: 100%;max-height: 100%;" src="{{baseUrl}}{{item.imgpath}}" ></div>-->
+    <div style="text-align: center; position: relative; bottom: 0;"><p>{{item.challenge_description}}</p></div>
+    <div *ngIf="!item.openclose" style="width:97%;padding-left:5px">
+      <div style="width:100%">
+        <div style="float: left;width:33.33333%;text-align:left;">
+            <div>
+                <div style="float:left">
+                    <img src="assets/custom-img/goldmedal.png" style="width:90px;height:130px;" />
+                </div>
+                <div class="slide">
+                    <article class="row g-bg-white mx-0">
+                        <h4 class="h3 g-font-weight-300 g-mb-20"  style="width:100%">
+                            <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.first_viz_id}">{{item.firsttitle}}</a>
+                         </h4>  
+                      <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                        
+                        <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.firstavatar}}">
+                        <a href="/bio/{{item.first_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.firstusername}}</strong></span></a>
+                      </div>
+                      <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                      height: 160px !important;
+                      object-fit: contain !important;
+                      background-size: contain !important;
+                      background-repeat: no-repeat;" 
+                      [style.background-image]="'url(' + baseUrl + item.firstvizavatar + ')'"></div>
+                    </article>
+                  </div>
+              </div>
+        </div>
+        <div style="float: left;width:33.33333%;text-align:center;">
+            <div>
+                <div style="float:left">
+                    <img src="assets/custom-img/silvermedal.png" style="width:90px;height:130px;" />
+                </div>
+                <div class="slide">
+                    <article class="row g-bg-white mx-0">
+                        <h4 class="h3 g-font-weight-300 g-mb-20" style="width:100%">
+                            <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.second_viz_id}">{{item.secondtitle}}</a>
+                         </h4>  
+                      <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                        
+                        <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.secondavatar}}">
+                        <a href="/bio/{{item.second_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.secondusername}}</strong></span></a>
+                      </div>
+                      <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                      height: 160px !important;
+                      object-fit: contain !important;
+                      background-size: contain !important;
+                      background-repeat: no-repeat;" 
+                      [style.background-image]="'url(' + baseUrl + item.secondvizavatar + ')'"></div>
+                    </article>
+                  </div>
+              </div>
+        </div>  
+        <div style="float: left;width:33.33333%;text-align:right;">
+            <div>
+            <div style="float:left">
+                <img src="assets/custom-img/bronzemedal.png" style="width:90px;height:130px;" />
+            </div>
+            <div class="slide">
+                <article class="row g-bg-white mx-0">
+                    <h4 class="h3 g-font-weight-300 g-mb-20"  style="width:100%">
+                        <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.third_viz_id}">{{item.thirdtitle}}</a>
+                     </h4>  
+                  <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                    
+                    <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.thirdavatar}}">
+                    <a href="/bio/{{item.third_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.thirdusername}}</strong></span></a>
+                  </div>
+                  <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                  height: 160px !important;
+                  object-fit: contain !important;
+                  background-size: contain !important;
+                  background-repeat: no-repeat;" 
+                  [style.background-image]="'url(' + baseUrl + item.thirdvizavatar + ')'"></div>
+                </article>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="text-center mb-5" style="float: left;
+      width: 70%;
+      padding-left: 33%;">
+          <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit"><a href="/viz-lib?challenge_id={{item.id}}"><span class="d-block g-color-white g-font-size-17 g-mb-20"><strong>View All Submissions</strong></span></a></button>
+      </div>
+      
+
+    </div>
+    <div *ngIf="item.openclose" style="width:97%;padding-left:5px">
+        <div class="text-center mb-5" style="float: left;
+        width: 70%;
+        padding-left: 33%;">
+            <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit"><a href="/my-visual/list?challenge_id={{item.id}}">Enter Now</a></button>
+        </div>
+    </div>
+</div>  
+
+<!--<table style="width:100%">
+    <tr>
+      <td style="width:33%">
+        <div>
+          <div style="float:left">
+              <img src="assets/custom-img/goldmedal.png" style="width:90px;height:130px;" />
+          </div>
+          <div class="slide">
+              <article class="row g-bg-white mx-0">
+                  <h4 class="h3 g-font-weight-300 g-mb-20"  style="width:100%">
+                      <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.first_viz_id}">{{item.firsttitle}}</a>
+                   </h4>  
+                <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                  
+                  <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.firstavatar}}">
+                  <a href="/bio/{{item.first_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.firstusername}}</strong></span></a>
+                </div>
+                <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                height: 160px !important;
+                object-fit: contain !important;
+                background-size: contain !important;
+                background-repeat: no-repeat;" 
+                [style.background-image]="'url(' + baseUrl + item.firstvizavatar + ')'"></div>
+              </article>
+            </div>
+        </div>
+      </td>
+      <td style="width:33%">
+        <div>
+          <div style="float:left">
+              <img src="assets/custom-img/silvermedal.png" style="width:90px;height:130px;" />
+          </div>
+          <div class="slide">
+              <article class="row g-bg-white mx-0">
+                  <h4 class="h3 g-font-weight-300 g-mb-20" style="width:100%">
+                      <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.second_viz_id}">{{item.secondtitle}}</a>
+                   </h4>  
+                <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                  
+                  <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.secondavatar}}">
+                  <a href="/bio/{{item.second_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.thirdusername}}</strong></span></a>
+                </div>
+                <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                height: 160px !important;
+                object-fit: contain !important;
+                background-size: contain !important;
+                background-repeat: no-repeat;" 
+                [style.background-image]="'url(' + baseUrl + item.secondvizavatar + ')'"></div>
+              </article>
+            </div>
+        </div>
+      </td>
+      <td style="width:33%">
+        <div>
+        <div style="float:left">
+            <img src="assets/custom-img/bronzemedal.png" style="width:90px;height:130px;" />
+        </div>
+        <div class="slide">
+            <article class="row g-bg-white mx-0">
+                <h4 class="h3 g-font-weight-300 g-mb-20"  style="width:100%">
+                    <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.third_viz_id}">{{item.thirdtitle}}</a>
+                 </h4>  
+              <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                
+                <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.thirdavatar}}">
+                <a href="/bio/{{item.third_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.thirdusername}}</strong></span></a>
+              </div>
+              <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+              height: 160px !important;
+              object-fit: contain !important;
+              background-size: contain !important;
+              background-repeat: no-repeat;" 
+              [style.background-image]="'url(' + baseUrl + item.thirdvizavatar + ')'"></div>
+            </article>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>-->
+
+<!-- <div class="wrapper" *ngFor="let item of rows">
+  <div></div>
+    <div class="ribbon-wrapper-green"><div class="ribbon-green">AUCTION</div></div>
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.challenge_name}}</mat-card-title>
+          <mat-card-subtitle>Active From {{item.start}} to {{item.end}}</mat-card-subtitle>
+        </mat-card-header>
+        
+        <img mat-card-image style="max-width: 400px; max-height: 400px;"  src="{{baseUrl}}{{item.imgpath}}" >
+        <mat-card-content>
+          <p>
+            {{item.challenge_description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+</div>
+<div class="wrapper" *ngFor="let item of rows">
+    <div class="ribbon-wrapper-green"><div class="ribbon-green">AUCTION</div></div>
+</div>​ -->
+
+
+
+<!-- 
+
+
+<div class="col-sm-6 col-lg-3" *ngFor="let item of rows">
+  <div class="card p-2 mt-3 mb-3">
+    <div class="card-image">
+      <img class="img-responsive" src="{{baseUrl}}{{item.avatar}}">
+    </div>
+    <div class="card-footer pr-0 pb-1 g-bg-white">
+      <div class="d-flex mr-3">
+        <a class="d-block g-color-black  g-font-size-14 mb-2" [routerLink]="['/visual']" [queryParams]="{id: item.id}" >{{item?.title}}</a>
+      </div>
+      <div class="media-body">
+        <div class="g-width-30 g-height-30 float-left">
+          <img class="img-fluid g-brd-around g-brd-2 g-brd-white rounded-circle" src="{{baseUrl}}{{item?.user_avatar}}" alt="Image Description">
+        </div>
+        <a href="bio/{{item.user_id}}"><h5 class="h6 g-color-primary g-pt-5 g-pl-10 g-font-primary g-font-size-12 g-font-weight-400 float-left">- {{item?.username}} </h5></a>
+      </div>
+    </div>
+    <a href="javascript:void(0)" class="float-right text-right g-bor-t-1" *ngIf='!global.isLoggedIn'><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</a> 
+    <div><img src="assets/custom-img/certificate-16.png" style="width:10%" title="Top Contributor" alt="Top Contributor" *ngIf="item.topcontrib > 0" />
+    <img src="assets/custom-img/trophy-16.png" style="width:10%" title="Viz-a-thon Winner" alt="Viz-a-thon Winner"  *ngIf="item.winner > 0" /></div>
+    <button class="btn btn-link float-right text-right g-bor-t-1 upvote-btn" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" [disabled]="item.upvoted"><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</button>
+    <a href="javascript:void(0)" class="float-right text-right g-bor-t-1" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" ><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</a> 
+  </div>
+</div> -->

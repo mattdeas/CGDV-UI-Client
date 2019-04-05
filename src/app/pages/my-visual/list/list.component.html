@@ -1,0 +1,269 @@
+<section class="signup-sec ms2 my-visual-add g-pt-100 g-pb-100">
+  <div class="container">
+    <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center g-width-100x--lg">
+        <h2  style="padding-left:12%" class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Add Visuals
+            <button style="width:125px;float:right;padding-right:115px" class="btn btn-md btn-block u-btn-primary rounded g-py-13" [routerLink]="['/guidelines']">Guidelines</button>
+        </h2>
+        
+
+      </div>
+    <div class="row justify-content-center">
+      <div class="flex-md-unordered align-self-center add-visual-form">
+        <div class="u-shadow-v21 g-bg-white rounded g-pa-40 float-left">
+          <!-- Form -->
+          <form class="" name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" novalidate>
+            <div class="col-sm-6 g-mb-30 float-left">
+              <label for="title" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Visualization Title</label>
+              <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="title" id="title" placeholder="Title" [(ngModel)]="model.title" #title="ngModel" [ngClass]="{ 'is-invalid': f.submitted && title.invalid }" required />
+              <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+                <div *ngIf="title.errors?.required">Visualization Title is required</div>
+              </div>
+            </div>
+
+            <!--<li class="nav-item  g-mx-10--lg g-mx-15--xl dropdown">
+                <a [routerLink]="['/guidelines']" class="nav-link g-py-7 g-px-0">Guidelines</a>
+             </li>-->
+            <!-- <div class="col-sm-6 g-mb-30 float-left">
+            <label for="author" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Author</label>
+              <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="author" id="author" placeholder="Author" [(ngModel)]="model.author" #author="ngModel" [ngClass]="{ 'is-invalid': f.submitted && author.invalid }" required />
+              <div *ngIf="f.submitted && author.invalid" class="invalid-feedback">
+                <div *ngIf="author.errors?.required">Author is required</div>
+              </div>
+          </div>      -->
+            <div class="col-sm-6 g-mb-30 float-left">
+              <label for="country_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Visualization Country</label>
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="country_id" [(ngModel)]="model.country_id" #country_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && country_id.invalid }">
+                <option [ngValue]="undefined" selected="">Select Country</option>
+                <option *ngFor="let co of countryList;" [ngValue]="co.id">
+                  {{ co.name }}
+                </option>
+              </select>
+              <div *ngIf="f.submitted && country_id.invalid" class="invalid-feedback">
+                <div *ngIf="country_id.errors?.required"> Visualization Country is required</div>
+              </div>
+            </div>
+            <div class="col-sm-6 g-mb-30 float-left">
+              <label for="university_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">University or Organization</label>
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="university_id" (change)="onUniChange($event)" [(ngModel)]="model.university_id" #university_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && university_id.invalid }">
+                <option [ngValue]="undefined" selected="">Select University or Organization</option>
+                <option *ngFor="let uni of universityList;" [ngValue]="uni.id">
+                  {{ uni.name }}
+                </option>
+                <option value="add_new">Other…</option>
+              </select>
+              <div *ngIf="f.submitted && university_id.invalid" class="invalid-feedback">
+                <div *ngIf="university_id.errors?.required">University is required</div>
+              </div>
+            </div>
+            <div class="col-sm-6 g-mb-30 float-left">
+              <label for="category_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Category</label>
+              <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="category_id" [(ngModel)]="model.category_id" #category_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && category_id.invalid }">
+                <option [ngValue]="undefined" selected="">Select category</option>
+                <option *ngFor="let cat of categoryList" [ngValue]="cat.id">
+                  {{ cat.name }}
+                </option>
+              </select>
+              <div *ngIf="f.submitted && category_id.invalid" class="invalid-feedback">
+                <div *ngIf="category_id.errors?.required">Category is required</div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 g-mb-30 float-left">
+                <label for="challenge_id" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Challenge</label>
+                  <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="challenge_id"  [(ngModel)]="model.challenge_id" #challenge_id="ngModel" [ngClass]="{ 'is-invalid': f.submitted && country_id.invalid }" >
+                    <option [ngValue]="undefined" selected="">Select Challenge</option>
+                    <option *ngFor="let ch of challengeList;" [ngValue]="ch.id">
+                      {{ ch.challenge_name }}
+                    </option>
+                  </select>
+            </div>
+
+            <div class="col-sm-6 g-mb-30 float-left">
+              <label for="data_src" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Data Source</label>
+              <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="data_src" id="data_src" placeholder="Data Source" [(ngModel)]="model.data_src" #data_src="ngModel" [ngClass]="{ 'is-invalid': f.submitted && data_src.invalid }"  />
+              <div *ngIf="f.submitted && data_src.invalid" class="invalid-feedback">
+                <div *ngIf="data_src.errors?.required">Data Source is required</div>
+              </div>
+            </div>
+            <div class="col-sm-6 g-mb-30 float-left">
+              <label for="tags" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Tags</label>
+              <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="tags" id="tags" placeholder="Add tags by comma seperated e.g. tag1,tag2" [(ngModel)]="model.tags" #tags="ngModel" />
+            </div>
+            <div class="col-sm-12 g-mb-30 float-left">
+              <label for="embed_code" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Embed Code</label>
+              <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="embed_code" id="embed_code" placeholder="Add Embed Code" [(ngModel)]="model.embed_code" #embed_code="ngModel">
+              </textarea>
+            </div>
+            
+            <div class="col-sm-12 g-mb-30 float-left">
+              <label for="description" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Description</label>
+                <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="embed_code" id="description" placeholder="Add Description" [(ngModel)]="model.description" #embed_code="ngModel">
+                </textarea>
+            </div>
+
+            <div class="col-sm-12 g-mb-30 float-left">
+                <input type="checkbox" name="comments" id="comments"  [(ngModel)]="model.comments" ng-true-vale="true" ng-false-value="false"  #comments="ngModel" /> 
+                <label for="comments" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Allow Comments</label>
+            </div>
+  
+            <div class="col-sm-12 float-left">
+              <div class="g-mb-30">
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Picture</label>
+                <input class="input-file-btn" type="file" (change)="changeListener($event)">
+              </div>
+              <div class="upload-img form-group row" *ngIf="image">
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13"></label>
+                <img  src="{{image}}">
+              </div>
+              <div class="g-mb-30" *ngIf="image">
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13"></label>
+                <button type="button" class="btn btn-primary mr-1 mb-1 " (click)="UploadImage()" [hidden]="!image" [disabled]="disableFlag ">Upload</button>
+                <button type="button" class="btn btn-primary mr-1 mb-1 " (click)="removeImage()" [hidden]="!image">Remove</button>
+              </div>
+              <div [hidden]="!uploading">
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Please wait while uploading…</label>
+              </div>
+            </div>
+              <div class="col-sm-3 float-left">
+                <button type="submit" class="btn btn-block u-btn-primary rounded g-py-13">Submit</button>
+                <!-- <button type="submit" class="btn u-btn-primary rounded g-py-13 col-xs-12 col-sm-3" [routerLink]="['/my-visual/list']">Cancel</button> -->
+              </div>
+          </form>
+          <!-- End Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Start Add University Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add University or Organization</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="flex-md-unordered align-self-center add-visual-form">
+            <div class="u-shadow-v21 g-bg-white rounded g-pa-40 ">
+              <!-- Form -->
+              <form class="g-py-15" name="form" (ngSubmit)="f1.form.valid && add_uni(f1)" #f1="ngForm" novalidate>
+                <!-- <div class="g-mb-30 col-sm-6">
+                  <label for="country_id_1" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Country</label>
+                  <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="country_id" [(ngModel)]="add_uni_model.country_id" #country_id_1="ngModel" [ngClass]="{ 'is-invalid': f1.submitted && country_id_1.invalid }" required="">
+                    <option [ngValue]="undefined" selected="">Select Country</option>
+                    <option *ngFor="let co of countryList;" [ngValue]="co.id">
+                      {{ co.name }}
+                    </option>
+                  </select>
+                  <div *ngIf="f1.submitted && country_id_1.invalid" class="invalid-feedback">
+                    <div *ngIf="country_id_1.errors?.required">Country is required</div>
+                  </div>
+                </div> -->
+                <div class="g-mb-30 col-sm-6">
+                  <label for="name" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">University or Organization Name</label>
+                  <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="name" id="name" placeholder="Name" [(ngModel)]="add_uni_model.name" #name="ngModel" [ngClass]="{ 'is-invalid': f1.submitted && name.invalid }" required />
+                  <div *ngIf="f1.submitted && name.invalid" class="invalid-feedback">
+                    <div *ngIf="name.errors?.required">University or Organization Name is required</div>
+                  </div>
+                </div>
+                <div class="text-center mb-5">
+                  <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit">Submit</button>
+                </div>
+              </form>
+              <!-- End Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Add University Modal -->
+</section>
+<section class="g-pt-100 g-pb-100 img-portfolio my_visuals_list">
+  <div class="container">
+    <div class="row">
+      <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center g-width-100x--lg">
+        <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">My Visuals</h2>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6 col-lg-3" *ngFor="let item of rows">
+            <div class="card p-2 mt-3 mb-3">
+              <div class="card-image">
+                <img class="img-responsive" src="{{baseUrl}}{{item.avatar}}">
+                        </div>
+                <div class="card-footer pr-0 pb-1 g-bg-white">
+                  <div class="d-flex mr-3">
+                    <a class="d-block g-color-black  g-font-size-14 mb-2" [routerLink]="['/visual']" [queryParams]="{id: item.id}" target="_blank">{{item?.title}}</a>
+                  </div>
+                  <div class="media-body">
+                    <div class="g-width-30 g-height-30 float-left">
+                      <img class="img-fluid g-brd-around g-brd-2 g-brd-white rounded-circle" src="{{baseUrl}}{{item?.user_avatar}}" alt="Image Description">
+                            </div>
+                      <h5 class="h6 g-color-primary g-pt-5 g-pl-10 g-font-primary g-font-size-12 g-font-weight-400 float-left">- {{item?.username}} </h5>
+                    </div>
+                  </div>
+                  <!-- <a href="javascript:void(0)" class="float-right text-right g-bor-t-1" *ngIf='!global.isLoggedIn'><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</a> -->
+                  <ul class="MV_listing">
+                    <li>
+                      <!-- <a href="javascript:void(0)" (click)="upvote(item.id)" [style.color]="item.upvoted ? '#72c02c' : null" ><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</a> -->
+                      <button class="btn btn-link upvote-btn" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" [disabled]="item.upvoted"><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</button>
+                    </li>
+                    <li><a href="javascript:void(0)" (click)="edit(item)"><i class="fa fa-pencil" ></i></a></li>
+                    <li><a href="javascript:void(0)" (click)="delete(item?.id,item?.user_id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div>
+              <!-- pager -->
+              <ul *ngIf="pager.pages && pager.pages.length > 1" class="pagination">
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a class="page-link"  (click)="getVisualList(1)">First</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a class="page-link"  (click)="getVisualList(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a class="page-link"  (click)="getVisualList(page)">{{page}}</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a class="page-link"  (click)="getVisualList(pager.currentPage + 1)">Next</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a class="page-link"  (click)="getVisualList(pager.totalPages)">Last</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--  <ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [rowHeight]="'auto'" [headerHeight]="50" [footerHeight]="50" [loadingIndicator]="loading" [count]="data?.count" [offset]="data?.currentPage - 1" [externalPaging]="true" [limit]="limit" [externalSorting]="true" (sort)="applySorting = true; getVisualList(1, form.value, $event, applyFilter ,applySorting)" [sorts]="sorts">
+          <ngx-datatable-column name="Title" prop="title"></ngx-datatable-column>
+          <ngx-datatable-column name="Author" prop="author"></ngx-datatable-column>
+          <ngx-datatable-column name="Tags" prop="tags"></ngx-datatable-column>
+          <ngx-datatable-column name="Action" [sortable]="false">
+            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <button class="btn btn-primary btn-xs mr-1 mb-1"(click)="edit(row)" title='Edit Visual' ><span class="fa fa-pencil"></span></button>
+            <button class="btn btn-danger btn-xs mr-1 mb-1" (click)="delete(row.id,row.user_id)" title='Delete Visual'><span class="fa fa-trash"></span></button>
+              <nb-actions size="medium">
+            <nb-action icon="nb-edit" (click)="edit(row)" title='Edit Visual'></nb-action>            
+            <nb-action icon="nb-trash" (click)="delete(row.id,row.user_id)" title='Delete Visual'></nb-action>
+            
+          </nb-actions>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+              <div class="cust-page">
+                <span *ngIf="rowCount">          
+          Page {{curPage}} of {{Math.ceil(rowCount/3)}} ({{rowCount}} items)
+        </span>
+              </div>
+              <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="rowCount" [hidden]="!((rowCount / pageSize) > 1)" (change)="getVisualList($event.page, form.value, $event, applyFilter ,applySorting)">
+              </datatable-pager>
+            </ng-template>
+          </ngx-datatable-footer>
+        </ngx-datatable> -->
+        </div>
+      </div>
+</section>

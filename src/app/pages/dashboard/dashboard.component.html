@@ -1,0 +1,145 @@
+
+         <section class="g-bg-cover g-bg-pos-top-center g-bg-img-hero g-bg-black-opacity-0_6--after g-min-height-100vh g-flex-centered g-py-100 main-banner">
+            <div class="FullVideo">
+            <video autoplay muted>
+              <source src="assets/videos/iStock-923229850.mp4" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+            </div>
+            <div class="container g-color-white text-center g-z-index-1">
+               <div class="mb-5">
+                  <h2 class="g-font-weight-700 g-font-size-40 g-font-size-60--md g-mb-30">
+                     <span class="u-text-animation u-text-animation--typing"></span>
+                  </h2>
+                  <p class="g-font-size-24 g-color-white">{{homeCMS?.video_section?.text_content}}</p>
+               </div>
+               <a class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" href="#!" data-target="#content">Explore Now</a>
+            </div>
+         </section>
+         <!-- End Promo Block -->
+         <!-- Stats Count -->
+         <br />
+         <section class="g-pt-50 g-pb-50 home-abt-sec">
+            <div style="position: absolute;left: 36%;">
+               <div id="shiva" style="background: #CB952D"><span class="count">{{users}}</span> <br /><div style="text-align: center"><strong>Users</strong></div></div>
+               <div id="shiva" style="background: #670E38"><span class="count">{{visuals}}</span> <div style="text-align: center"><strong>Visualizations</strong></div> </div>
+               <div id="shiva" style="background: #2C5D6C"><span class="count">{{universities}}</span> <div style="text-align: center"><strong>Universities</strong></div> </div>
+               <div id="shiva" style="background: #A7CB73"><span class="count" style="text-align: center">{{countries}}</span> <div style="text-align: center"><strong>Countries</strong></div> </div>
+            </div>
+            <div>
+
+            </div>
+
+         </section>
+         
+            
+         
+         <!-- End Stats Count-->
+         <!-- About Us -->
+         <section class="g-pt-100 g-pb-100 home-abt-sec">
+            <div class="container">
+               <header class="text-center g-width-100x--md mx-auto">
+                
+                  <div class="u-heading-v2-2--top g-brd-primary g-mb-20">
+                    <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-30">About Us</h2>
+                  </div>
+
+                  <p class="lead fadeInUp u-in-viewport" data-animation="fadeInUp" data-animation-delay="500" data-animation-duration="1500" style="animation-duration: 1500ms;" [innerHtml]="homeCMS?.about_us"> </p>
+               </header>
+            </div>
+         </section>
+         <!-- End About Us -->
+
+    <!-- Section Content -->
+    <div id="content" class="g-py-30"></div>
+      <section class="g-pos-rel g-pt-50 g-pb-140 main-slider">
+        <div class="container">
+          <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+            <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Featured Viz</h2>
+          </div>
+
+          <ngx-slick-carousel class="carousel" 
+                        #slickModal="slick-carousel" 
+                        [config]="slideConfig" >
+              <div ngxSlickItem *ngFor="let item of featuredList" class="slide">
+                   <article class="row g-bg-white mx-0">
+                <div class="col-md-7 col-lg-7 g-bg-size-cover w-h-o-custm" [style.background-image]="'url(' + baseUrl + item.avatar + ')'"></div>
+
+                <div class="col-md-5 col-lg-5 g-pa-30 text-center g-bgcolor-green">
+                  <h4 class="h3 g-font-weight-300 g-mb-20">
+                           <a class="ttl g-color-white g-font-size-26 g-font-weight-500" [routerLink]="['/visual']" [queryParams]="{id: item.id}">{{item?.title}}</a>
+                        </h4>
+                        <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item?.user_avatar}}" alt="Image Description">
+                        <a href="/bio/{{item.user_id}}"><span class="d-block g-color-white g-font-size-17 g-mb-20">{{item?.username}}</span></a>
+                        <ul class="g-color-white list-inline g-font-size-12 g-mb-5 g-bottom-20 g-pos-abs g-left-minus-50 g-right-minus-50">
+                           <li class="list-inline-item">
+                              <i class="fa fa-heart g-pos-rel g-top-1 g-mr-2" (click)="upvote(item)"></i> {{item?.upvote}}
+                              <!--<button class="btn btn-link float-right text-right g-bor-t-1 upvote-btn" (click)="upvote(item)" [style.color]="item.upvoted ? '#72c02c' : null" [disabled]="item.upvoted"><i class="fa fa-heart" aria-hidden="true"></i> {{item.upvote}}</button>-->
+                           </li>
+                        </ul>
+                </div>
+              </article>
+              </div>
+          </ngx-slick-carousel>
+        </div>
+      </section>
+      <!-- End Section Content -->
+
+         <!-- Start our partners -->
+         <section class="g-pt-70 g-pb-70 g-bg-white our-partner">
+            <div class="container">
+              <div class="row justify-content-center g-mb-60">
+                 <div class="col-lg-12">
+                    <!-- Heading -->
+                    <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+                    <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-30">Our Collaborators</h2>
+                  </div>
+                    <!-- End Heading -->
+                 </div>
+              </div>
+              
+              <div class="g-overflow-hidden">
+            <div class="row text-center mx-0 g-ml-minus-1 g-mb-minus-1">
+              <div class="col-6 col-sm-3 col-lg-3 d-flex align-items-center g-nwbrd-left g-nwbrd-bottom fadeInUp u-in-viewport" data-animation="fadeInUp" data-animation-delay="500" data-animation-duration="1500" style="animation-duration: 1500ms;" *ngFor="let item of homeCMS.partners">
+                <a class="w-70 g-py-50 g-px-40" href="{{item.link}}" target="_blank">
+                  <img class="img-fluid" src="{{baseUrl}}{{item.avatar}}" alt="{{item.title}}">
+                </a>
+              </div>
+
+              
+
+            </div>
+          </div>
+
+
+            </div>
+         </section>
+         <!-- End Our partners -->
+         <!-- Testimonials -->
+         <section class="testimonials-sec">
+            <div class="container g-pt-100 g-pb-100">
+               <div class="row justify-content-center">
+                  <div class="col-lg-10">
+                     <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+                    <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-30">Latest News</h2>
+                  </div>
+
+          <ngx-slick-carousel class="carousel text-center g-pt-30" 
+                        #slickModal="slick-carousel" data-infinite="true" data-autoplay="true" data-fade="true" data-speed="20" [config]='slideConfig_news'
+                         >
+              <div ngxSlickItem class="slide" *ngFor="let item of homeCMS.latest_news">
+                    <a href="{{item.link}}"  target="_blank">
+                      <blockquote class="lead g-color-black g-font-size-22 g-line-height-2 mb-4">{{item.content}}</blockquote>
+                    </a>
+              </div>
+          </ngx-slick-carousel>                    
+                  </div>
+               </div>
+            </div>
+            
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 323" enable-background="new 0 0 1920 323" xml:space="preserve">
+          <polygon fill="#f0f2f8" points="0,323 1920,323 1920,0 "></polygon>
+          <polygon fill="#f5f6fa" points="-0.5,322.5 -0.5,131.5 658.3,212.3 "></polygon>
+          </svg>
+         </section>
+         

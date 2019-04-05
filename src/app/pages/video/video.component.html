@@ -1,0 +1,86 @@
+<!-- Promo Block -->
+<!--<section class="g-bg-cover g-bg-pos-top-center g-bg-img-hero g-flex-centered g-bg-black-opacity-0_6--after inner-banner" style="background-image: url(assets/custom-img/img5.jpg);">
+  <section class="g-pt-30 g-pb-70 img-portfolio">
+  
+  <div class="container g-bg-cover__inner g-pb-100 g-pt-130">
+  <div class="container">
+    <div class="row align-items-center">
+    <div class="col-lg-6 g-mb-30 g-mb-0--lg">
+        <h2 class="h1 text-uppercase g-color-white g-mb-30">
+                        <span class="g-px-5">Featured Video</span><br>
+                      </h2>
+        <h3 class="h4 g-color-white">
+                        <span class="g-px-5">A view of public transportation in Washington DC</span>
+                      </h3>
+      </div>
+      <div class="col-lg-6">
+        <div class="embed-responsive embed-responsive-16by9" *ngIf="rows.length" [innerHtml]="rows[0].embed_code | safe: 'html'">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<!-- End Promo Block -->
+
+<!--<section class="g-pos-rel g-pt-50 g-pb-30 main-slider ms2" >
+    <div class="container">
+      <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+        <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Featured Video</h2>
+      </div>
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let item of featuredList" class="slide">
+          <article class="row g-bg-white mx-0">
+            <div class="col-md-7 col-lg-7 g-bg-size-cover w-h-o-custm" [style.background-image]="'url(' + baseUrl + item.avatar + ')'"></div>
+            <div class="col-md-5 col-lg-5 g-pa-30 text-center g-bgcolor-green">
+              <h4 class="h3 g-font-weight-300 g-mb-20">
+                             <a class="ttl g-color-white g-font-size-26 g-font-weight-500" [routerLink]="['/visual']" [queryParams]="{id: item.id}">{{item?.title}}</a>
+                          </h4>
+              <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.user_avatar}}" alt="Image Description">
+              <span class="d-block g-color-white g-font-size-17 g-mb-20">{{item?.username}}</span>
+              <ul class="g-color-white list-inline g-font-size-12 g-mb-5 g-bottom-20 g-pos-abs g-left-minus-50 g-right-minus-50">
+                <li class="list-inline-item">
+                  <i class="fa fa-heart g-pos-rel g-top-1 g-mr-2"></i> {{item?.upvote}}
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </section>-->
+
+<!-- Blog News <section class="container g-pt-80 g-pb-50 video-sec">-->
+
+<section class="g-pos-rel g-pt-50 g-pb-30 main-slider ms2 ng-star-inserted">
+  <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+    <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Videos</h2>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-lg-4 g-mb-50" *ngFor="let item of rows">
+      <div [innerHtml]="item.embed_code  | safe: 'html'"></div>
+      <p class="g-color-gray-dark-v4 mb-0">{{item.title}}</p>
+    </div>
+  </div>
+  <div>
+    <!-- pager -->
+    <ul *ngIf="pager.pages && pager.pages.length > 1" class="pagination">
+      <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+        <a class="page-link" (click)="getVideoList(1)">First</a>
+      </li>
+      <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+        <a class="page-link" (click)="getVideoList(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+        <a class="page-link" (click)="getVideoList(page)">{{page}}</a>
+      </li>
+      <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a class="page-link" (click)="getVideoList(pager.currentPage + 1)">Next</a>
+      </li>
+      <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a class="page-link" (click)="getVideoList(pager.totalPages)">Last</a>
+      </li>
+    </ul>
+  </div>
+</section>
+<!-- End Blog News -->

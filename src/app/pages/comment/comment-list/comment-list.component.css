@@ -1,0 +1,37 @@
+.comment {
+    font-size: 14px;
+    color: #444444;
+  
+  }
+  
+  .created-at {
+    font-size: 11px;
+    color: #8298B9;
+  }
+  
+  .margin-comment {
+    margin-left: 40px;
+  }
+  
+  .user-name {
+    margin-left: 10px;
+    width: 22em;
+    font-size: 14px;
+    color: #002C71;
+  }
+  
+  .comment-container {
+    margin: 20px 0 20px 0;
+  }
+  
+  
+  .comment-link {
+    font-size: 14px;
+    color: #FFA640;
+    cursor: pointer;
+  }
+  
+  .scroll-comments {
+    height: 510px;
+    overflow-y: scroll
+  }

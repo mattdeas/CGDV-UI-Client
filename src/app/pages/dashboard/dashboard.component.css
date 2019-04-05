@@ -1,0 +1,24 @@
+#shiva
+{
+  width: 100px;
+	height: 100px;
+
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  float:left;
+  margin:5px;
+}
+.count
+{
+  line-height: 100px;
+  color:white;
+  margin-left:34%;
+  font-size:25px;
+}
+
+.linker
+{
+  font-size : 20px;
+  font-color: black;
+}

@@ -1,0 +1,95 @@
+<!-- Signup -->
+<section class="signup-sec ms2 g-pt-100 g-mb-100">
+  <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center g-width-100x--lg">
+    <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-80">Profile</h2>
+  </div>
+  <div class="container">
+  <div class="row justify-content-center">
+    <div class="flex-md-unordered align-self-center add-visual-form">
+      <div class="u-shadow-v21 g-bg-white rounded g-pa-50 float-left">
+        <!-- Form -->
+        <form class="g-py-15" name="form" #f="ngForm" novalidate>
+          <div class="col-sm-12 g-mb-30 float-left" style="text-align:center">
+            <img style="border-radius: 10%;" src="{{image}}">
+          </div>
+          <div class="col-sm-12 g-mb-30 float-center"  style="text-align:center">
+              <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-35">{{ model.firstname}} {{ model.lastname }}</label>              
+          </div>
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="email" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-20">Email: {{model.email}}</label>
+          </div>
+          <div class="col-sm-6 g-mb-30 float-left">
+            <label for="mobile" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-20">Mobile: {{model.mobile}}</label>
+          </div>
+          <div class="col-sm-6 g-mb-30 float-left">
+              <label for="mobile" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-20">Country: {{model.country}}</label>
+          </div>
+          <div class="col-sm-6 g-mb-30 float-left">
+              <label for="mobile" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-20">Organization: {{model.university}}</label>
+          </div>
+          <div class="col-sm-12 g-mb-30 float-left">
+              <label for="bio" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-20">Biography:</label>
+          </div>
+          <div class="col-sm-12 g-mb-30 float-left">
+            <label for="bio" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-18">{{ model.bio }}</label>
+              <!--<textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="bio" id="bio" placeholder="Add bio" [(ngModel)]="model.bio" #bio="ngModel">
+              </textarea>-->
+          </div>
+          <div class="col-sm-12 g-mb-30 float-left">
+            <div class="col-sm-8 g-mb-30 float-left" style="text-align: center;padding-left: 30%;">
+              <button class="btn btn-md btn-block u-btn-primary rounded g-py-13" [routerLink]="['/']">Back</button>
+            </div>
+          </div>
+          
+        </form>
+        <!-- End Form -->
+      </div>
+    </div>
+  </div>
+  <!-- Start Add University Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add University or Organization</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="flex-md-unordered align-self-center add-visual-form">
+          <div class="u-shadow-v21 g-bg-white rounded g-pa-40 ">
+            <!-- Form -->
+            <form class="g-py-15" name="form" (ngSubmit)="f1.form.valid" #f1="ngForm" novalidate>
+             <!--  <div class="g-mb-30 col-sm-6">
+                <label for="country_id_1" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Country</label>
+                <select class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="country_id" [(ngModel)]="add_uni_model.country_id" #country_id_1="ngModel" [ngClass]="{ 'is-invalid': f1.submitted && country_id_1.invalid }" required="">
+                  <option [ngValue]="undefined" selected="">Select Country</option>
+                  <option *ngFor="let co of countryList;" [ngValue]="co.id">
+                    {{ co.name }}
+                  </option>
+                </select>
+                <div *ngIf="f1.submitted && country_id_1.invalid" class="invalid-feedback">
+                  <div *ngIf="country_id_1.errors?.required">Country is required</div>
+                </div>
+              </div> -->
+              <div class="g-mb-30 col-sm-6">
+                <label for="name" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">University or Organization Name</label>
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="name" id="name" placeholder="Name" [(ngModel)]="add_uni_model.name" #name="ngModel" [ngClass]="{ 'is-invalid': f1.submitted && name.invalid }" required />
+                <div *ngIf="f1.submitted && name.invalid" class="invalid-feedback">
+                  <div *ngIf="name.errors?.required">University or Organization Name is required</div>
+                </div>
+              </div>
+              <div class="text-center mb-5">
+                <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit">Submit</button>
+              </div>
+            </form>
+            <!-- End Form -->
+          </div>
+        </div>
+      </div>        
+    </div>
+  </div>
+</div>
+<!-- End Add University Modal -->
+</div>
+</section>

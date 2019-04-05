@@ -1,0 +1,92 @@
+<!-- Header -->
+         <header id="js-header" class="u-header u-header--static">
+
+            <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-5">
+               <nav class="js-mega-menu navbar navbar-expand-lg hs-menu-initialized hs-menu-horizontal">
+                  <div class="container" style="margin-left:10%;margin-right:10%" >
+                     <!-- Responsive Toggle Button -->
+                     <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-3 g-right-0" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+                     <span class="hamburger hamburger--slider">
+                     <span class="hamburger-box">
+                     <span class="hamburger-inner"></span>
+                     </span>
+                     </span>
+                     </button>
+                     <!-- End Responsive Toggle Button -->
+                     <!-- Logo -->
+                     <a href="javascript:void(0)" [routerLink]="['/']" class="navbar-brand">
+                     <img src="assets/custom-img/CGDV_Logo.png" alt="">
+                     </a>
+                     <!-- End Logo -->
+                     <!-- Navigation -->
+                     <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+                        <div class="top-navbar">
+                           <div class="search">
+                              <form  #form="ngForm" id="" class="input-group u-shadow-v19 g-brd-primary--focus g-rounded-20">
+                                 <input class="form-control " type="text" placeholder="Search here ..." name="title" #title="ngModel" ngModel>
+                                 <button class="btn input-group-addon d-flex align-items-center g-brd-none g-color-white g-bg-primary g-bg-primary-light-v1--hover g-font-size-15 g-rounded-right-20 g-transition-0_2" type="button" [routerLink]="['/viz-lib']" [queryParams]="{title: form.value.title}">
+                                 <i class="fa fa-search"></i>
+                                 </button>
+                              </form>
+                           </div>
+                           <div class="topsocialicons">
+                              <a href="https://www.qedgroupllc.com/contact-us/" target="_blank"><i class="fa fa-envelope"></i></a>
+                              <a href="https://www.facebook.com/qedgroup/" target="_blank"><i class="fa fa-facebook"></i></a>
+                              <a href="https://twitter.com/qedgroup" target="_blank"><i class="fa fa-twitter"></i></a>
+                              <a href="https://www.linkedin.com/company/the-qed-group-llc/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                              <a href="https://www.youtube.com/channel/UC_hgqiCGZYhRu2T6Wc4gMsA/featured" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                           </div>
+                        </div>
+                        <ul class="navbar-nav g-pos-rel g-font-weight-400 ml-auto">
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl dropdown">
+                              <a [routerLink]="['/about']" class="nav-link g-py-7 g-px-0">About</a>
+                           </li>
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                              <a [routerLink]="['/viz-lib']" class="nav-link g-py-7 g-px-0">Library</a>
+                           </li>
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                              <a [routerLink]="['/viz-challenge']" class="nav-link g-py-7 g-px-0">Challenges</a>
+                           </li>
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                              <a [routerLink]="['/video']" class="nav-link g-py-7 g-px-0">Videos</a>
+                           </li>
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf='!global.isLoggedIn'>
+                              <a class="nav-link g-py-7 g-px-0" [routerLink]="['/authentication/signin']">Login</a>
+                           </li>
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl" *ngIf='global.isLoggedIn'>
+                              <a [routerLink]="['/my-visual/list']" class="nav-link g-py-7 g-px-0">My Visuals</a>
+                           </li>
+                           <li class="nav-item  g-mx-10--lg g-mx-15--xl dropdown" *ngIf='global.isLoggedIn'>
+                              <a href="javascript:;" class="nav-link">
+                                  <img [src]="global.avatar" class="navbar-avatar rounded-circle d-flex align-self-center g-brd-around g-brd-1 g-brd-white g-width-25 g-height-25"  title="user">
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li>
+                                  <a class="dropdown-item" [routerLink]="['/profile']">
+                                    <span>Edit Profile</span>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a class="dropdown-item" [routerLink]="['/changePassword']">
+                                    <span>Change Password</span>
+                                  </a>
+                                </li>
+                                <div class="dropdown-divider"></div>
+                                <li>
+                                  <a class="dropdown-item" href="javascript:;" (click)="global.logout()">
+                                    <span>Signout</span>
+                                  </a>
+                                </li>                                  
+                              </ul>
+                           </li>
+
+                           <!-- <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+                              <a [routerLink]="['/authentication/signup']" class="nav-link g-py-7 g-px-0">Signup</a>
+                           </li> -->
+                        </ul>
+                     </div>
+                  </div>
+               </nav>
+            </div>
+         </header>
+         <!-- End Header -->

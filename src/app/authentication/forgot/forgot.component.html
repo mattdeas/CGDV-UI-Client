@@ -1,0 +1,40 @@
+
+<!-- Start Forget password -->
+    <section class="log-in signup-sec ms2">
+      <div class="container g-py-100">
+        <div class="row justify-content-center">
+          <div class="col-sm-8 col-lg-5">
+            <div class="u-shadow-v21 g-bg-white rounded g-py-40 g-px-30">
+              <header class="text-center mb-4">
+                <h2 class="h2 g-color-black g-font-weight-400">Recover your password</h2>
+              </header>
+
+           <!-- Form -->
+              <form class="g-py-15" name="form" (ngSubmit)="f.form.valid && onSubmit(f.form.value)"  #f="ngForm" novalidate>                
+                <div class="g-mb-30">
+                  <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Email:</label>
+                  <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" type="email" placeholder="johndoe@gmail.com" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"  ngModel name="email" email #email="ngModel"  required/>
+                  <div class="invalid-feedback" *ngIf="f.submitted && email.invalid">
+                    <p *ngIf="email?.errors?.required">Email is required.</p>
+                    <p *ngIf="email.errors?.email">Email must be a valid email address</p>
+                  </div>                  
+                </div>
+
+                <div class="text-center mb-5">
+                  <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit" >Forgot Password</button>
+                </div>                
+              </form>
+              <!-- End Form -->
+              
+              <footer class="text-center">
+                <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">Don't have an account? <a class="g-font-weight-600" [routerLink]="['/authentication/signup']">signup</a>
+                </p>
+
+              </footer> 
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Forget password -->
