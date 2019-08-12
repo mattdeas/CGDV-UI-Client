@@ -19,12 +19,15 @@ export class AboutComponent {
   arrowsClasses="u-arrow-v1 g-pos-abs g-right-0 g-bottom-100x g-width-35 g-width-45--md g-height-35 g-height-45--md g-font-size-18 g-color-gray-light-v1 g-color-white--hover g-bg-primary--hover g-brd-around g-brd-gray-light-v1 g-brd-primary--hover g-rounded-50x g-mb-65 g-transition-0_2 g-transition--ease-in";
   arrowLeftClasses="fa fa-angle-left g-mr-40 g-mr-60--md";
   arrowRightClasses="fa fa-angle-right";
+  public innerWidth: any;
+  public innerHeight: any;
   slideConfig_nav = {
     // slidesToShow: 5,
     slidesToScroll: 1,
     asNavFor: '.slider-for',
     dots: false,
     centerMode: true,
+    arrows: true,
     focusOnSelect: true
   };
   slideConfig_body = {
@@ -37,8 +40,36 @@ export class AboutComponent {
   modalData: any;
   ngOnInit(){
     this.getCMSContent();
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
 
   }
+  slideConfig_mobile_about = {
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    //asNavFor: '.slider-for',
+    dots: false,
+    centerMode: true,
+    arrows: false,
+    focusOnSelect: true,
+    autoplay:true,
+    autoplayTimeout: 500,
+    //autoplayTimeout:1000,
+    autoplayHoverPause:true
+  };
+
+
+  slideConfig = {
+    "slidesToShow": 3, 
+    "slidesToScroll": 1,
+    "dots":true,
+    "infinite": false,
+    arrows: false,
+    autoplay:true,
+    autoplayTimeout:1000,
+    autoplayHoverPause:true
+  };
+
   getCMSContent(){
     this.cmsService.getAboutAboutpage().subscribe((res: any) => {
         if (res.status === 0) {
@@ -93,12 +124,14 @@ export class AboutComponent {
     }
 
     openModal(content,member){
+      if(this.innerWidth > 1000) // Not Mobile
+      {
       this.modalData = member;  
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       
-    }, (reason) => {
-      
-    });
+         }, (reason) => {
+          });
+      }
     }
 
     // You don't need to use document.ready... 

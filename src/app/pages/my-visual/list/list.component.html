@@ -90,22 +90,63 @@
               <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="tags" id="tags" placeholder="Add tags by comma seperated e.g. tag1,tag2" [(ngModel)]="model.tags" #tags="ngModel" />
             </div>
             <div class="col-sm-12 g-mb-30 float-left">
-              <label for="embed_code" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Embed Code</label>
+              <label for="embed_code" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Embed Code </label><br />
+              <input type="checkbox" name="advancedembed" id="advancedembed"  [(ngModel)]="showhideAdvancedEmbed" ng-true-value="true" ng-false-value="false" /> 
+                <label for="advancedembed" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Show Advanced Embed Settings</label>
+              <div class="col-sm-12 g-mb-30 float-left" *ngIf="showhideAdvancedEmbed">
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Width</label>
+                  <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="advwidth" id="advwidth" placeholder="Width" [(ngModel)]="model.advwidth" #title="ngModel" />
+                <br />    
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Height</label>
+                  <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="advheight" id="advheight" placeholder="Height" [(ngModel)]="model.advheight" #title="ngModel" />
+                <br />
+                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Source</label>
+                  <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" 
+                  name="advsource" id="advsource" placeholder="Source" [(ngModel)]="model.advsrc" #title="ngModel" />
+                <br />
+                <input type="checkbox" name="scrolling" id="scrolling"  [(ngModel)]="model.advscrolling" ng-true-value="yes" ng-false-value="no" #scrolling="ngModel" /> 
+                <label for="scrolling" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Allow Scrolling</label>
+                <button type="button" class="btn btn-block u-btn-primary rounded g-py-13 " (click)="PopulateEmbed()">Populate Embed</button>
+              </div>
               <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="embed_code" id="embed_code" placeholder="Add Embed Code" [(ngModel)]="model.embed_code" #embed_code="ngModel">
               </textarea>
             </div>
             
             <div class="col-sm-12 g-mb-30 float-left">
               <label for="description" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Description</label>
-                <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="embed_code" id="description" placeholder="Add Description" [(ngModel)]="model.description" #embed_code="ngModel">
+                <textarea class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="description" id="description" placeholder="Add Description" [(ngModel)]="model.description" #description="ngModel">
                 </textarea>
             </div>
 
             <div class="col-sm-12 g-mb-30 float-left">
                 <input type="checkbox" name="comments" id="comments"  [(ngModel)]="model.comments" ng-true-vale="true" ng-false-value="false"  #comments="ngModel" /> 
                 <label for="comments" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Allow Comments</label>
+                <br />
+                <input type="checkbox" name="multiuser" id="multiuser"  [(ngModel)]="showhideMultiUser" ng-true-value="true" ng-false-value="false" /> 
+                <label for="multiuser" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Multiple Users for this Submission</label>
             </div>
-  
+            <div class="col-sm-12 g-mb-30 float-left" style="overflow-y: scroll;height: 400px;" *ngIf="showhideMultiUser">
+              <div class="col-sm-12 g-mb-30 float-left" *ngIf="showhideMultiUser">
+                  <div class="float-left" *ngFor="let seluser of selectedUsers">
+                      <button type="button" class="btn btn-primary" style="position:float;text-align: left" (click)="remUser(seluser.id, $event)">{{seluser.lastname}}, {{seluser.firstname}}</button>
+                  </div>
+                  <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="searchuser" id="searchuser" placeholder="Search User" [ngModel]="usrSearch" (ngModelChange)="UserSearchChange($event)"  />  
+                  <ul class="list-group" *ngFor="let user of selUserList">
+                      <li class="list-group-item">
+                          <input type="checkbox"
+                              name="item-{{user.id}}"
+                              #myItem
+                              (change)="OnCheckboxSelect(user.id, user.lastname, user.firstname, $event)" />
+      
+                        <!-- DOES NOT WORK 
+                          <input type="checkbox" name="userid" id="userid" onchange="AddRemoveUser(user.id)" ng-true-value="user.id" />-->
+                        Email: {{user.email}} LastName: {{user.lastname}} FirstName: {{user.firstname}} </li>
+                    </ul>
+              </div>
+              
+              
+            </div>
+            
             <div class="col-sm-12 float-left">
               <div class="g-mb-30">
                 <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Picture</label>
@@ -126,7 +167,7 @@
             </div>
               <div class="col-sm-3 float-left">
                 <button type="submit" class="btn btn-block u-btn-primary rounded g-py-13">Submit</button>
-                <!-- <button type="submit" class="btn u-btn-primary rounded g-py-13 col-xs-12 col-sm-3" [routerLink]="['/my-visual/list']">Cancel</button> -->
+                <button type="button" class="btn btn-block u-btn-primary rounded g-py-13 " (click)="Preview()">Preview</button>
               </div>
           </form>
           <!-- End Form -->
@@ -169,6 +210,7 @@
                 </div>
                 <div class="text-center mb-5">
                   <button class="btn btn-block u-btn-primary rounded g-py-13" type="submit">Submit</button>
+                  <button type="button" class="btn btn-block u-btn-primary rounded g-py-13 " (click)="Preview()">Preview</button>
                 </div>
               </form>
               <!-- End Form -->

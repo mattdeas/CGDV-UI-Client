@@ -24,16 +24,20 @@ button:focus{outline: none;}
 .our-journy-sec .slider.slider-for .slick-slide{padding: 30px 0 0;position: relative;z-index: 99;}
 .our-journy-sec .slick-prev:before{content: ''!important;background: url(../custom-img/left-arrow-white.png);width: 60px; height: 60px;float: left;opacity: 1!important;}
 .our-journy-sec .slick-next:before{content: ''!important;background: url(../custom-img/right-arrow-white.png);width: 60px; height: 60px;float: left;opacity: 1!important;}
-.our-journy-sec .slick-prev, .our-journy-sec .slick-next{width: 60px; height: 60px;top:45px; transform: translate(0, 0);-webkit-transform: translate(0, 0);text-indent: -9999px;background: transparent;border:none;position: absolute;padding: 0;}
+.our-journy-sec .slick-prev,.our-journy-sec .slick-next{width: 60px; height: 60px;top:45px; transform: translate(0, 0);-webkit-transform: translate(0, 0);text-indent: -9999px;background: transparent;border:none;position: absolute;padding: 0;}
 .our-journy-sec .slick-prev {left: 350px;z-index: 99;}
 .our-journy-sec .slick-next {right: 350px;z-index: 99;}
+
+.our-journy-secmobile .slick-prev {left: 0px;z-index: 99;}
+.our-journy-secmobile .slick-next {right: 0px;z-index: 99;}
 ul.our-journy-des{float: left;width: 100%;margin-top: 50px;padding-left: 0;list-style: none;}
 ul.our-journy-des li{float: left;width:46%;margin-right: 8%;}
 ul.our-journy-des li:first-child{margin-right: 0;float: right;}
 ul.our-journy-des li h3{font-weight: 600;font-size: 28px;color: #52544c!;margin: 0 0 25px;}
 ul.our-journy-des li p {color: #111;font-size: 18px;line-height:32px;margin: 0px;}
 ul.our-journy-des li img{width: auto;}
-.journy-year{position: relative;display: table;width: 150px;height: 150px;background: #0e5365;border-radius: 100%;-webkit-border-radius: 100%;-moz-border-radius: 100%;margin: 0 auto}
+.journy-year{position: relative;display: table;width: 150px;height: 150px;background: #0e5365;border-radius: 100%;-webkit-border-radius: 100%;-moz-border-radius: 100%;margin: 0 auto; left: -4%}
+.journy-yearmobile{position: relative;display: table;width: 150px;height: 150px;background: #0e5365;border-radius: 100%;-webkit-border-radius: 100%;-moz-border-radius: 100%;margin: 0 auto; left: -6%}
 .journy-year span{font-size: 30px; color: #fff; text-align: center;font-weight: 500; display: table-cell;vertical-align: middle;}
 .our-team{background: #f7f7f7;}
 .our-team em{font-weight: 600;}
@@ -45,7 +49,7 @@ ul.our-journy-des li img{width: auto;}
 .video-slider-home img{height: 350px;object-fit: cover;}
 
 header .navbar{padding-top: 0;padding-bottom: 0;}
-header .navbar-brand{padding: 0;}
+header .navbar-brand{padding: 0; z-index: 999999;}
 header .navbar-brand img{width: 60%;}
 header.u-header nav a.nav-link{color:#52544c!important;font-size: 18px;padding-bottom: 15px!important;padding-top: 15px!important;}
 header.u-header nav a.nav-link:hover{color:#c7932c!important;}
@@ -252,6 +256,7 @@ header.u-header.bg-over-hdr nav a.nav-link:hover {color: #c7932c!important;}
 .search{display: inline-block;margin-right: 40px;}
 @media (min-width: 992px){}
 .navbar-expand-lg .navbar-collapse {flex-wrap: wrap;}
+  
 }
 
 /***** sticky menu ****/
@@ -283,6 +288,16 @@ header.sticky .navbar-brand img {
     height: 100vh;
     overflow: hidden;
 }
+
+.FullVideoMobile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: hidden;
+}
+
 .FullVideo video{
   min-width: 100%;
   min-height: 100%;
@@ -296,6 +311,12 @@ header.sticky .navbar-brand img {
   line-height: 30px;
   font-size: 22px;
 }
+
+.containermobile{
+  position: absolute;
+  top: 30%;
+}
+
 .container.feature-vizzz a.ttl:hover{
   color: #0e5365;
   text-decoration: none;
@@ -455,6 +476,7 @@ a.g-color-black{transition: all 0.3s ease-in-out 0s;}
 .our-partner .img-fluid {width: 170px; height: 70px; object-fit: contain;}
 .main-slider .slick-list.draggable{box-shadow: 0 8px 24px 0 rgba(0,0,0,.08), 0 16px 40px 0 rgba(0,0,0,.08);}
 .team-member { display: inline-block; width: 18%; margin-right: 2%;}
+.team-membermobile { display: inline-block; width: 48%; margin-right: 2%;}
 .team-member:last-child{margin-right: 0;}
 .img-portfolio .card-footer a{overflow: hidden; text-overflow: ellipsis; height: 68px; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
 .card-image img.img-responsive { width: 100%; height: 120px; object-fit: contain; display: inline-block; vertical-align: middle; margin: 0 auto;}

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 declare var $: any;
 @Component({
@@ -8,10 +9,15 @@ declare var $: any;
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor( public global: GlobalService,public router: Router) {
+	public innerWidth: any;
+  constructor( public global: GlobalService,public router: Router,private _sanitizer: DomSanitizer) {
 
-  }
+	}
+	showHideMenu = false;
 
+	ngOnInit(){
+		this.innerWidth = window.innerWidth;
+	}
   ngAfterViewInit() {
         this.doJqueryLoad();         
     }
@@ -33,6 +39,23 @@ export class HeaderComponent {
 		//       $.HSCore.components.HSTabs.init('[role="tablist"]');
 		//     }, 200);
 		// });
-    }
+		}
+		hideMenu()
+		{
+				this.showHideMenu = !this.showHideMenu;
+				console.log(this.showHideMenu);
+				//"collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg
+		}
+		getCurrentStyle()
+		{
+			var style = "display:block;"
+			var style2 = "display:none;"
+
+			if(this.showHideMenu)
+				return this._sanitizer.bypassSecurityTrustStyle(style);
+			else return this._sanitizer.bypassSecurityTrustStyle(style2);
+				
+		}
+
 
 }

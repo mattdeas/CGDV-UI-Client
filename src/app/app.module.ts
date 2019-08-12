@@ -25,6 +25,8 @@ import { isPlatformBrowser } from '@angular/common';
 
 import {ToasterModule} from 'angular2-toaster';
 import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule,MatChipList} from '@angular/material/chips';
+import {MatIconModule, MatIcon} from '@angular/material/icon';
 
 import {
     SocialLoginModule,
@@ -33,8 +35,7 @@ import {
     FacebookLoginProvider,
 } from "angular-6-social-login";
 //import { CommentListComponent } from '../app/pages/comment/comment-list/comment-list.component'
-import {MatDividerModule} from '@angular/material';
-
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 
@@ -65,7 +66,11 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     ToasterModule.forRoot(),
     SocialLoginModule,
-    MatCardModule
+    MatCardModule,
+    MatChipsModule,
+    MatIconModule,
+    
+    DeviceDetectorModule.forRoot(),
   ],
   declarations: [
     AppComponent,  

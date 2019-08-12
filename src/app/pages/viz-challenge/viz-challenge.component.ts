@@ -33,6 +33,8 @@ export class VizChallengeComponent {
   sorts: any[] = [];
   loading;
   limit = 20;
+  public innerWidth: any;
+  public innerHeight: any;
 
   now: any;
 today: string ;
@@ -74,6 +76,9 @@ today: string ;
     })
     this.now = new Date;
     this.today =this.now.toISOString();
+    
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
   }
 
   getChallengeList(){

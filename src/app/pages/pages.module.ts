@@ -11,6 +11,7 @@ import { VizOfDayComponent } from './viz-of-day/viz-of-day.component';
 import { VizLibComponent } from './viz-lib/viz-lib.component';
 import { VideoComponent } from './video/video.component';
 import { VisualComponent } from './visual/visual.component';
+import { VisualPreviewComponent } from './visualpreview/visualpreview.component';
 import { VizChallengeComponent } from './viz-challenge/viz-challenge.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PagesRoutes } from './pages.routing';
@@ -27,6 +28,10 @@ import { CommentAddComponent } from './comment/comment-add/comment-add.component
 import {MatDividerModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import { GuidelinesComponent } from './guidelines/guidelines.component';
+import { GuideComponent } from './guide/guide.component';
+import {MatChip, MatChipsModule, MatChipList} from '@angular/material/chips';
+import {MatIconModule, MatIcon} from '@angular/material/icon';
+import { LZStringModule, LZStringService } from 'ng-lz-string';
 
 @NgModule({
   imports: [
@@ -39,6 +44,10 @@ import { GuidelinesComponent } from './guidelines/guidelines.component';
     CustomFormsModule,
     MatDividerModule,
     MatCardModule,
+    MatChipsModule,
+    MatIconModule,
+    LZStringModule,
+    
   ],
   declarations: [
   	DashboardComponent,
@@ -57,7 +66,14 @@ import { GuidelinesComponent } from './guidelines/guidelines.component';
     CommentListComponent,
     CommentAddComponent,
     GuidelinesComponent,
+    GuideComponent,
+    VisualPreviewComponent,
     
+    
+  ],
+  providers: [
+    // Specify the service in the providers section
+    LZStringService
   ]
 })
 

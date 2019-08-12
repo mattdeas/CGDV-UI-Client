@@ -15,6 +15,7 @@ export class VisualComponent {
   baseUrl = environment.baseUrl;
   featuredList = [];
   visual;
+  visUsers;
   vizId;
   comments;
   constructor(public router: Router,
@@ -27,8 +28,29 @@ export class VisualComponent {
     this.route.queryParams.subscribe(params => {
       this.vizId = params['id'];
       this.getVisual();
+      this.getVisualUsers();
     });
 
+  }
+
+  getVisualUsers(){
+    var url = '?viz_id='+this.vizId;  
+    this.visualService.getVisualUser(url).subscribe((res: any) => {
+      if (res.status === 0) {
+        return false;
+      }
+      if(res.status){
+        console.log('VisualUsers')
+        console.log(res);
+        this.visUsers = res.result.data[0];
+        console.log(this.visUsers);
+        //console.log(this.visual.vnumcomments);
+        
+      }
+    },
+    (error) => {        
+      this.appComponent.showError(error);
+    });
   }
 
   getVisual(){
@@ -53,6 +75,8 @@ export class VisualComponent {
       (error) => {        
         this.appComponent.showError(error);
       });
+
+    
   }
 
   ngAfterViewInit() {
@@ -66,12 +90,27 @@ export class VisualComponent {
         
     }
     load(){
+      //var divElement = $('.tableauPlaceholder');                             
+      //var vizElement = $('object')[0];
+      //divElement.style.width = '100%';
+      //divElement.style.height = '100%';
+      //vizElement.style.width = '100%';
+      //vizElement.style.height = '100%';
+     // vizElement.style.maxWidth = '1050px';
+     // vizElement.style.height = ((divElement.offsetWidth || 1110) * 0.75) + 'px';
+     // vizElement.style.maxHeight = '2000px';
+      //var scriptElement = document.createElement('script');
+      //scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+     //scriptElement.src = '';
+      //vizElement.parentNode.insertBefore(scriptElement, vizElement);
       var divElement = $('.tableauPlaceholder');                             
       var vizElement = $('object')[0];
       vizElement.style.width = '100%';
       vizElement.style.maxWidth = '1050px';
       vizElement.style.height = ((divElement.offsetWidth || 1110) * 0.75) + 'px';
-      vizElement.style.maxHeight = '887px';
+      //vizElement.style.height = '100%';
+      //vizElement.style.maxHeight = '887px';
+      //vizElement.style.marginLeft = '4%';
       var scriptElement = document.createElement('script');
       scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
       vizElement.parentNode.insertBefore(scriptElement, vizElement);

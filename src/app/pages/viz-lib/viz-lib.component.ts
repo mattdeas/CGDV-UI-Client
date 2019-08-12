@@ -3,7 +3,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { VisualService} from '../../services/visual.service';
 import { CommonService} from '../../services/common.service';
-
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { AppComponent } from '../../app.component';
 import { PagerService } from '../../services/pager.serrvice';
 import { GlobalService } from '../../services/global.service';
@@ -42,13 +42,15 @@ export class VizLibComponent {
   countryList:any = [];
   challengeList:any = [];
   fromSearch:any = false;
+  innerWidth : number;
+  
   constructor(public router: Router,
              private route: ActivatedRoute,
              public global: GlobalService,
              public commonService: CommonService,
              public visualService: VisualService,
              private pagerService: PagerService,
-             public appComponent: AppComponent) {
+             public appComponent: AppComponent,private _sanitizer: DomSanitizer) {
   }
   arrowsClasses="u-arrow-v1 g-pos-abs g-right-0 g-bottom-100x g-width-35 g-width-45--md g-height-35 g-height-45--md g-font-size-18 g-color-gray-light-v1 g-color-white--hover g-bg-primary--hover g-brd-around g-brd-gray-light-v1 g-brd-primary--hover g-rounded-50x g-mb-65 g-transition-0_2 g-transition--ease-in";
   arrowLeftClasses="fa fa-angle-left g-mr-40 g-mr-60--md";
@@ -101,6 +103,9 @@ export class VizLibComponent {
 
         this.getVisualList(1, this.filterData, '', this.applyFilter, this.applySorting);
     });
+
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth);
 
   }
 
@@ -226,4 +231,12 @@ upvote(viz){  //Standard List Upvote
         $( "#js-header" ).removeClass("bg-over-hdr");
         $( "#js-header" ).removeClass("sticky");        
     }
+
+    getCurrentStyle()
+		{
+      if(this.innerWidth < 1000)
+				return this._sanitizer.bypassSecurityTrustStyle("padding-left:10%;padding-right:10%;width:100%;text-align:center");
+      else
+        return this._sanitizer.bypassSecurityTrustStyle("width:100%;text-align:center");
+		}
 }

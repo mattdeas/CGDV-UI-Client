@@ -1,11 +1,12 @@
-         <section class="g-py-80 iframe-sec g-bg-gray-light-v5">
+         <section class="g-py-10 iframe-sec g-bg-gray-light-v5">
             <div class="container" *ngIf="visual && visual.html" [innerHtml]= "visual?.html | safe:'html'">
             </div>
             <div class="container" *ngIf="visual && !visual.html">
             	<img src="{{baseUrl}}{{visual.avatar}}" *ngIf="visual.avatar">
             </div>
             <br />
-            <div *ngIf="visual" style="padding-left: 15%;width: 85%;text-align: center;" class="col-sm-12 g-mb-30 float-left">
+            <!--<div *ngIf="visual" style="padding-left: 15%;width: 85%;text-align: center;" class="col-sm-12 g-mb-30 float-left">-->
+                <div *ngIf="visual" style="padding-left: 15%;width: 100%;text-align: center;" class="col-sm-12 g-mb-30 float-left">
                   <label for="description" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-18">
                     {{visual.description}} 
                   </label>
@@ -13,6 +14,19 @@
                   
                   
             </div>
+            <div style="padding-left:40%">
+            <table>
+              <tr>
+              <td>Authors: </td>
+              <td *ngFor="let visusr of visUsers" >
+                <div style="text-align: center;"> 
+                  <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{visusr.avatar}}">
+                  <a href="/bio/{{visusr.user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{visusr.firstname}} {{visusr.lastname}}</strong></span></a>
+                </div>
+              </td>          
+            </tr>
+            </table>
+          </div>
             <br />
             <div class="container" *ngIf="visual && visual.comments">
               <div *ngIf="visual.comments"><app-comment-list></app-comment-list></div>

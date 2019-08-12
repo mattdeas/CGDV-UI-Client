@@ -1,0 +1,22 @@
+         <section class="g-py-10 iframe-sec g-bg-gray-light-v5">
+            <div class="container" *ngIf="html" [innerHtml]= "html | safe:'html'">
+            </div>
+            <div class="container" *ngIf="!html">
+            	<img src="{{baseUrl}}{{avatar}}" *ngIf="avatar">
+            </div>
+            <br />
+            <!--<div *ngIf="visual" style="padding-left: 15%;width: 85%;text-align: center;" class="col-sm-12 g-mb-30 float-left">-->
+                <div style="padding-left: 15%;width: 100%;text-align: center;" class="col-sm-12 g-mb-30 float-left">
+                  <label for="description" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-18">
+                    {{description}} 
+                  </label>
+                        
+                  
+                  
+            </div>
+            <br />
+            <div class="container" *ngIf="comments">
+              <div *ngIf="comments"><app-comment-list></app-comment-list></div>
+              
+            </div>
+         </section>

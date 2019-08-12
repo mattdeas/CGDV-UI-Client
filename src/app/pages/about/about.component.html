@@ -23,18 +23,39 @@
       </div>
     </div>
     <div class="g-overflow-hidden">
-      <div class="row text-center mx-0 g-ml-minus-1 g-mb-minus-1">
-        <div class="col-6 col-sm-3 col-lg-3 d-flex align-items-center g-nwbrd-left g-nwbrd-bottom fadeInUp u-in-viewport" data-animation="fadeInUp" data-animation-delay="500" data-animation-duration="1500" style="animation-duration: 1500ms;" *ngFor="let item of aboutCMS.partners">
+      <div class="row text-center mx-0 g-ml-minus-1 g-mb-minus-1" *ngIf="innerWidth > 1000">
+        <div class="col-6 col-sm-3 col-lg-3 d-flex align-items-center g-nwbrd-left g-nwbrd-bottom fadeInUp u-in-viewport" data-animation="fadeInUp" data-animation-delay="500" data-animation-duration="1500" style="animation-duration: 1500ms;" *ngFor="let item of aboutCMS.partners" >
           <a class="w-70 g-py-50 g-px-40" href="{{item.link}}" target="_blank">
                   <img class="img-fluid" src="{{baseUrl}}{{item.avatar}}" alt="{{item.title}}">
                 </a>
         </div>
       </div>
     </div>
+    <div class="container"  *ngIf="innerWidth <=1000">
+        <!--<ngx-slick-carousel  style="width:300px" class="slider slider-nav" #slickModal="slick-carousel" [config]='slideConfig_mobile_about'>
+          <div style="width:120px" ngxSlickItem *ngFor="let item of aboutCMS.partners">
+            <div style="width:120px">
+                    <a class="w-70 g-py-50 g-px-40" href="{{item.link}}" target="_blank">
+                            <img class="img-fluid" src="{{baseUrl}}{{item.avatar}}" alt="{{item.title}}">
+                          </a>
+            </div>
+          </div>
+        </ngx-slick-carousel>-->
+        <ngx-slick-carousel style="left:-47px;" class="slider slider-nav" #slickModal="slick-carousel" [config]='slideConfig_mobile_about' >
+            <div  ngxSlickItem *ngFor="let item of aboutCMS.partners">
+                <div class="journy-year" style="background:none">
+                  <a class="w-70 g-py-50 g-px-40" href="{{item.link}}" target="_blank">
+                      <img class="img-fluid" src="{{baseUrl}}{{item.avatar}}" alt="{{item.title}}">
+                    </a>
+              </div>
+            </div>
+          </ngx-slick-carousel>
+    </div>
   </div>
 </section>
 <!-- End Our partners -->
 <!-- Our Environment -->
+<div *ngIf="innerWidth>1000">
 <section class="g-py-60 our-journy-sec">
   <div class="container">
     <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
@@ -58,8 +79,10 @@
               <img src="{{baseUrl}}{{item.avatar}}" alt="" title="">
             </li>
             <li>
-              <h3>{{item.header}}</h3>
-              <p>{{item.content}}</p>
+              <h3 *ngIf="innerWidth >=1000">{{item.header}}</h3>
+              <p *ngIf="innerWidth >=1000">{{item.content}}</p>
+              <h3 style="font-size: 12px" *ngIf="innerWidth <=1000">{{item.header}}</h3>
+              <p style="font-size: 12px" *ngIf="innerWidth <=1000">{{item.content}}</p>
             </li>
           </ul>
         </div>
@@ -68,6 +91,44 @@
   </div>
   <!-- End Carousel -->
 </section>
+</div>
+<div *ngIf="innerWidth<1000">
+<section class="g-py-60  our-journy-sec our-journy-secmobile">
+    <div class="container">
+      <div class="u-heading-v2-2--top g-brd-primary g-mb-20 text-center">
+        <h2 class="u-heading-v2__title g-line-height-1_3 g-font-weight-500 g-font-size-32 g-mb-30">Our Journey</h2>
+      </div>
+    </div>
+    <!-- Carousel -->
+    <div class="our-journy-inner-sec">
+      <div class="container">
+        <ngx-slick-carousel class="slider slider-nav" #slickModal="slick-carousel" [config]='slideConfig_nav'>
+          <div ngxSlickItem *ngFor="let item of aboutCMS.our_journey">
+            <div class="journy-year">
+              <span>{{item.nav_title}}</span>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+        <ngx-slick-carousel class="slider slider-for" #slickModal1="slick-carousel" [config]='slideConfig_body'>
+          <div ngxSlickItem *ngFor="let item of aboutCMS.our_journey">
+            <ul class="our-journy-des">
+              <li>
+                <img src="{{baseUrl}}{{item.avatar}}" alt="" title="">
+              </li>
+              <li>
+                <h3 *ngIf="innerWidth >=1000">{{item.header}}</h3>
+                <p *ngIf="innerWidth >=1000">{{item.content}}</p>
+                <h3 style="font-size: 12px" *ngIf="innerWidth <=1000">{{item.header}}</h3>
+                <p style="font-size: 12px" *ngIf="innerWidth <=1000">{{item.content}}</p>
+              </li>
+            </ul>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+    <!-- End Carousel -->
+  </section>
+</div>
 <!-- End Our Environment -->
 
 <!-- Team Blocks -->
@@ -82,7 +143,10 @@
       <div class="team-title">
         <h4>{{item}}</h4>
       </div>
-      <div class="g-mb-30 team-member" *ngFor="let member of aboutCMS?.team[item]">
+      <div [ngClass]="{
+        'g-mb-30 team-member': innerWidth >= 1000,
+        'g-mb-30 team-membermobile': innerWidth <= 1000
+      }"  *ngFor="let member of aboutCMS?.team[item]">
         <!-- Team Block -->
         <a href="javascript:void(0)"  (click)="openModal(content, member)">
           <figure class="u-block-hover">
@@ -105,6 +169,7 @@
         </a>
         <!-- End Team Block -->
       </div>
+      
     </div>
     
   </div>

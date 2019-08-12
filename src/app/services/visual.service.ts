@@ -32,7 +32,13 @@ export class VisualService {
     return this.http.get(API_URL+'api/visual'+querystring);
   }
 
+  getVisualUser(querystring): Observable<any> { 
+    console.log(API_URL+'api/visualusers'+querystring);
+    return this.http.get(API_URL+'api/visualusers'+querystring);
+  }
+
   addVisual(visualData): Observable<any> {
+    console.log(visualData);
     return this.http.post(API_URL+'api/visual',visualData);
   }
 

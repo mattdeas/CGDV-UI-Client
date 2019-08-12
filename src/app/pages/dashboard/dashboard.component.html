@@ -1,42 +1,99 @@
 
-         <section class="g-bg-cover g-bg-pos-top-center g-bg-img-hero g-bg-black-opacity-0_6--after g-min-height-100vh g-flex-centered g-py-100 main-banner">
-            <div class="FullVideo">
+         <section class="g-bg-cover g-bg-pos-top-center g-bg-img-hero g-bg-black-opacity-0_6--after g-min-height-100vh g-flex-centered g-py-100 main-banner" *ngIf="innerWidth >= 1000">
+            <div 
+            [ngClass]="{
+               'FullVideo':innerWidth >= 1000,
+               'FullVideoMobile':innerWidth < 1000
+             }"
+            >
             <video autoplay muted>
               <source src="assets/videos/iStock-923229850.mp4" type="video/mp4">
               Your browser does not support HTML5 video.
             </video>
             </div>
-            <div class="container g-color-white text-center g-z-index-1">
+            
+            <div class="container g-color-white text-center g-z-index-1" *ngIf="innerWidth >= 1000">
                <div class="mb-5">
                   <h2 class="g-font-weight-700 g-font-size-40 g-font-size-60--md g-mb-30">
                      <span class="u-text-animation u-text-animation--typing"></span>
                   </h2>
-                  <p class="g-font-size-24 g-color-white">{{homeCMS?.video_section?.text_content}}</p>
+                  <p class="g-font-size-24 g-color-white" *ngIf="innerWidth >=1000">{{homeCMS?.video_section?.text_content}}</p>
                </div>
-               <a class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" href="#!" data-target="#content">Explore Now</a>
+               <!--<a class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" href="#!" data-target="#content">Explore Now</a>-->
+               <button style="    width: 200px;
+               background-color: rgb(8, 64, 78);
+               display: inline-block;
+               color: white;" class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" [routerLink]="['/guide']">Learn More</button>
+               <!--<button style="width:200px;float:right;padding-right:115px" class="btn g-font-weight-600 btn-md btn-block u-btn-primary rounded g-py-13" [routerLink]="['/guide']">What's this?</button>-->
             </div>
+            <div class="container containermobile g-color-white text-center g-z-index-1" *ngIf="innerWidth <1000">
+                  <div class="mb-5">
+                     <h2 class="g-font-weight-700 g-font-size-40 g-font-size-60--md g-mb-30">
+                        <span class="u-text-animation u-text-animation--typing"></span>
+                     </h2>
+                     <p class="g-font-size-24 g-color-white" *ngIf="innerWidth >=1000">{{homeCMS?.video_section?.text_content}}</p>
+                  </div>
+                  <!--<a class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" href="#!" data-target="#content">Explore Now</a>-->
+                  <button style="    width: 200px;
+                  background-color: rgb(8, 64, 78);
+                  display: inline-block;
+                  color: white;" class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" [routerLink]="['/guide']"  *ngIf="innerWidth >= 1000">Learn More</button>
+                  <!--<button style="width:200px;float:right;padding-right:115px" class="btn g-font-weight-600 btn-md btn-block u-btn-primary rounded g-py-13" [routerLink]="['/guide']">What's this?</button>-->
+               </div>
          </section>
+
+         <section class="g-bg-cover g-bg-pos-top-center g-bg-img-hero g-bg-black-opacity-0_6--after g-flex-centered g-py-100 main-banner"  [style]="getMobileStyle(1)" *ngIf="innerWidth < 1000">
+               <div 
+               [ngClass]="{
+                  'FullVideo':innerWidth >= 1000,
+                  'FullVideoMobile':innerWidth < 1000
+                }"
+               >
+               <video autoplay [style]="getMobileStyle(2)">
+                 <source src="assets/videos/iStock-923229850.mp4" type="video/mp4">
+                 Your browser does not support HTML5 video.
+               </video>
+               </div>
+               
+               
+               <div class="container containermobile g-color-white text-center g-z-index-1"  *ngIf="innerWidth <1000">
+                     <div class="mb-5">
+                        <h2 class="g-font-weight-700 g-font-size-20 g-font-size-60--md g-mb-30">
+                           <span class="u-text-animation u-text-animation--typing"></span>
+                        </h2>
+                        <p class="g-font-size-10 g-color-white">{{homeCMS?.video_section?.text_content}}</p>
+                     </div>
+                     <!--<a class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" href="#!" data-target="#content">Explore Now</a>-->
+                     <!--<button style="    width: 200px;
+                     background-color: rgb(8, 64, 78);
+                     display: inline-block;
+                     color: white;" class="js-go-to btn g-font-weight-600 text-uppercase g-px-30 g-py-13" [routerLink]="['/guide']"  *ngIf="innerWidth > 1000">Learn More</button>-->
+                     <!--<button style="width:200px;float:right;padding-right:115px" class="btn g-font-weight-600 btn-md btn-block u-btn-primary rounded g-py-13" [routerLink]="['/guide']">What's this?</button>-->
+                  </div>
+            </section>
          <!-- End Promo Block -->
          <!-- Stats Count -->
          <br />
-         <section class="g-pt-50 g-pb-50 home-abt-sec">
-            <div style="position: absolute;left: 36%;">
+         <section class="g-pt-50 g-pb-50 home-abt-sec" *ngIf="innerWidth >=1000">
+            <div style="padding-left: 25%;" *ngIf="innerWidth >=1000">
                <div id="shiva" style="background: #CB952D"><span class="count">{{users}}</span> <br /><div style="text-align: center"><strong>Users</strong></div></div>
                <div id="shiva" style="background: #670E38"><span class="count">{{visuals}}</span> <div style="text-align: center"><strong>Visualizations</strong></div> </div>
                <div id="shiva" style="background: #2C5D6C"><span class="count">{{universities}}</span> <div style="text-align: center"><strong>Universities</strong></div> </div>
                <div id="shiva" style="background: #A7CB73"><span class="count" style="text-align: center">{{countries}}</span> <div style="text-align: center"><strong>Countries</strong></div> </div>
             </div>
-            <div>
-
-            </div>
-
+            <!-- <div style="padding-left: 5%;" *ngIf="innerWidth < 1000">
+                  <div id="shiva" style="background: #CB952D"><span class="count">{{users}}</span> <br /><div style="text-align: center"><strong>Users</strong></div></div>
+                  <div id="shiva" style="background: #670E38"><span class="count">{{visuals}}</span> <div style="text-align: center"><strong>Visualizations</strong></div> </div>
+                  <div id="shiva" style="background: #2C5D6C"><span class="count">{{universities}}</span> <div style="text-align: center"><strong>Universities</strong></div> </div>
+                  <div id="shiva" style="background: #A7CB73"><span class="count" style="text-align: center">{{countries}}</span> <div style="text-align: center"><strong>Countries</strong></div> 
+               </div>
+            </div> -->
          </section>
          
-            
-         
+         <div style="height: 100px" *ngIf="innerWidth >=1000" ></div>
          <!-- End Stats Count-->
          <!-- About Us -->
-         <section class="g-pt-100 g-pb-100 home-abt-sec">
+         <section class="g-pt-10 g-pb-100 home-abt-sec">
             <div class="container">
                <header class="text-center g-width-100x--md mx-auto">
                 

@@ -46,6 +46,8 @@ export class CommentListComponent implements OnInit {
   }
 
   getVisualComments(){
+    if(this.vizId != null)
+    {
     var url = '?viz_id='+this.vizId;    
     this.visualService.getVisualComments(url).subscribe((res: any) => {
         
@@ -62,6 +64,7 @@ export class CommentListComponent implements OnInit {
       (error) => {        
         this.appComponent.showError(error);
       });
+    }
   }
 
   setVisibility() {

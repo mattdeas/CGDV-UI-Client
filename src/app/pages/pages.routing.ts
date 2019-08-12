@@ -8,11 +8,15 @@ import { VizOfDayComponent } from './viz-of-day/viz-of-day.component';
 import { VizLibComponent } from './viz-lib/viz-lib.component';
 import { VideoComponent } from './video/video.component';
 import { VisualComponent } from './visual/visual.component';
+import { VisualPreviewComponent } from './visualpreview/visualpreview.component';
 import { VizChallengeComponent} from './viz-challenge/viz-challenge.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AuthGuard } from '../authguard';
 import { BioComponent } from './bio/bio.component';
 import { GuidelinesComponent } from './guidelines/guidelines.component';
+import { GuideComponent } from './guide/guide.component';
+
+
 
 export const PagesRoutes: Routes = [
 {
@@ -78,10 +82,24 @@ export const PagesRoutes: Routes = [
   }
 },
 {
+  path: 'visualpreview',
+  component: VisualPreviewComponent,
+  data: {
+    heading: 'VisualPreview'
+  }
+},
+{
   path: 'guidelines',
   component: GuidelinesComponent,
   data: {
     heading: 'Guidelines'
+  }
+},
+{
+  path: 'guide',
+  component: GuideComponent,
+  data: {
+    heading: 'Guide'
   }
 },
 {

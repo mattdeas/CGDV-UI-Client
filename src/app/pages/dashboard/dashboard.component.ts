@@ -5,6 +5,9 @@ import { VisualService } from '../../services/visual.service';
 import { CMSService } from '../../services/cms.service';
 import { CommonService } from '../../services/common.service'
 import { AppComponent } from '../../app.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import * as Typed from 'typed.js';
 declare  var Typed:any;
 import "../../../assets/vendor/typedjs/typed.min.js";
@@ -17,6 +20,7 @@ declare var $: any;
 })
 
 export class DashboardComponent {
+  deviceInfo = null;
   baseUrl = environment.baseUrl;
   featuredList: any = [];
   homeCMS: any = {};
@@ -25,14 +29,19 @@ export class DashboardComponent {
   countries: number;
   universities: number;
   visuals: number;
+  publicIP: any;
+  public innerWidth: any;
+  public innerHeight: any;
 
   constructor(public router: Router,
               public visualService: VisualService,
               public cmsService: CMSService,
               public commonService: CommonService,
-              public appComponent: AppComponent
+              private deviceService: DeviceDetectorService,
+              public appComponent: AppComponent,private _sanitizer: DomSanitizer,
+              private http:HttpClient
     ) {
-    
+    this.epicFunction();
   }
   arrowsClasses="u-arrow-v1 g-pos-abs g-right-0 g-bottom-100x g-width-35 g-width-45--md g-height-35 g-height-45--md g-font-size-18 g-color-gray-light-v1 g-color-white--hover g-bg-primary--hover g-brd-around g-brd-gray-light-v1 g-brd-primary--hover g-rounded-50x g-mb-65 g-transition-0_2 g-transition--ease-in";
   arrowLeftClasses="fa fa-angle-left g-mr-40 g-mr-60--md";
@@ -52,12 +61,58 @@ export class DashboardComponent {
     this.getFeaturedList();
     this.getCMSContent();
     this.getStats();
-    console.log(this.statistics);
+
+    let headers = new HttpHeaders().set('access-control-allow-origin',"https://api.ipify.org");
+    //headers.get('https://api.ipify.org?format=json');
+    console.log('1');
+    //console.log(headers.get('https://api.ipify.org?format=json').length);
+    this.http.get('https://api.ipify.org?format=json', { headers }).subscribe(data => {
+      this.publicIP=data['ip'];
+    });
+    //this.http.get('https://api.ipify.org?format=json').subscribe(data => {
+    //  this.publicIP=data['ip'];
+    //});
+    console.log(this.publicIP);
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
+    console.log(this.innerHeight);
+
+    
     
   }
 
+  epicFunction() {
+    console.log('hello `Home` component');
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    const isMobile = this.deviceService.isMobile();
+    const isTablet = this.deviceService.isTablet();
+    const isDesktopDevice = this.deviceService.isDesktop();
+    console.log(this.deviceInfo);
+    console.log(isMobile);  // returns if the device is a mobile device (android / iPhone / windows-phone etc)
+    console.log(isTablet);  // returns if the device us a tablet (iPad etc)
+    console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
+  }
    
 
+
+  
+  
+
+  getMobileStyle(myVal: any)
+		{
+      if(myVal == 1)
+      {
+        const style = "height: " + this.innerHeight + "px;";
+        return this._sanitizer.bypassSecurityTrustStyle(style);
+      }
+      else
+      {
+        const style = "object-fit: fill; height: " + this.innerHeight + "px;";
+        return this._sanitizer.bypassSecurityTrustStyle(style);
+      }
+      
+    }
+    
   getStats(){
     this.commonService.getDashboardStatistics('').subscribe((res: any) => {
 
@@ -67,12 +122,6 @@ export class DashboardComponent {
       this.visuals = parseInt(this.statistics.visuals);
       this.users = parseInt(this.statistics.users);
       this.countries = parseInt(this.statistics.countries);
-      console.log(this.universities);
-      console.log(this.visuals);
-      console.log(this.users);
-      console.log(this.countries);
-
-      
 
       //if (res.status === 0) {
       //  return false;

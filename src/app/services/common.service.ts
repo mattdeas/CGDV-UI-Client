@@ -39,10 +39,21 @@ export class CommonService {
     return  localStorage.getItem('isLoggedIn') && localStorage.getItem('currentUser')  ? JSON.parse(localStorage.getItem('currentUser')) : {};
   }
 
+  getUserList(url): Observable<any> {
+   return this.http.get(API_URL+'api/user/listall');
+  }
   getChallengeList(url): Observable<any> {
      return this.http.get(API_URL+'api/challengelist');
   }
   getChallengeListAll(url): Observable<any> {
    return this.http.get(API_URL+'api/challengelistall');
-}
+   }
+
+   //getUserProfile(id: any) {
+   //   return this.http.get(baseUrl + 'api/user/'+id);
+   // }
+   getIPAddressInfo(ipaddress: any) {
+      return this.http.get(API_URL + '/api/userip/'+ipaddress);
+   }
+
 }

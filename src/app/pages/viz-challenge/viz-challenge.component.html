@@ -1,4 +1,4 @@
-<div class="wrapper" *ngFor="let item of rows">
+<div [ngClass]="{'wrapper': innerWidth>1000, 'wrappermobile':innerWidth < 1000 }" *ngFor="let item of rows">
     <div  *ngIf="item.openclose" class="ribbon-wrapper-green">
       <div class="ribbon-green" >ACTIVE</div></div>
     <div *ngIf="!item.openclose" class="ribbon-wrapper-green">      
@@ -6,14 +6,13 @@
     </div>
     <div style="font-size:25px;text-align: center"><strong>{{item.challenge_name}}</strong></div>
     <div style="text-align: right;padding-right: 5%;">Active From <strong>{{item.start}}</strong> to <strong>{{item.end}}</strong></div>
-    <!--<div class="square"><img  style="max-width: 100%;max-height: 100%;" src="{{baseUrl}}{{item.imgpath}}" ></div>-->
     <div style="text-align: center; position: relative; bottom: 0;"><p>{{item.challenge_description}}</p></div>
     <div *ngIf="!item.openclose" style="width:97%;padding-left:5px">
-      <div style="width:100%">
+      <div style="width:100%" *ngIf="innerWidth>1000">
         <div style="float: left;width:33.33333%;text-align:left;">
             <div>
                 <div style="float:left">
-                    <img src="assets/custom-img/goldmedal.png" style="width:90px;height:130px;" />
+                    <img src="assets/custom-img/goldmedal.png" style="width:30px;height:51px;" />
                 </div>
                 <div class="slide">
                     <article class="row g-bg-white mx-0">
@@ -38,7 +37,7 @@
         <div style="float: left;width:33.33333%;text-align:center;">
             <div>
                 <div style="float:left">
-                    <img src="assets/custom-img/silvermedal.png" style="width:90px;height:130px;" />
+                    <img src="assets/custom-img/silvermedal.png" style="width:30px;height:51px;"  />
                 </div>
                 <div class="slide">
                     <article class="row g-bg-white mx-0">
@@ -63,7 +62,7 @@
         <div style="float: left;width:33.33333%;text-align:right;">
             <div>
             <div style="float:left">
-                <img src="assets/custom-img/bronzemedal.png" style="width:90px;height:130px;" />
+                <img src="assets/custom-img/bronzemedal.png" style="width:30px;height:51px;"/>
             </div>
             <div class="slide">
                 <article class="row g-bg-white mx-0">
@@ -86,6 +85,83 @@
             </div>
         </div>
       </div>
+      <div style="width:100%" *ngIf="innerWidth<1000">
+          <div style="width:100%;text-align:left;">
+              <div>
+                  <div style="float:left">
+                      <img src="assets/custom-img/goldmedal.png" style="width:30px;height:51px;" />
+                  </div>
+                  <div class="slide">
+                      <article class="row g-bg-white mx-0">
+                          <h4 class="h3 g-font-weight-300 g-mb-20"  style="width:100%">
+                              <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.first_viz_id}">{{item.firsttitle}}</a>
+                           </h4>  
+                        <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                          
+                          <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.firstavatar}}">
+                          <a href="/bio/{{item.first_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.firstusername}}</strong></span></a>
+                        </div>
+                        <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                        height: 160px !important;
+                        object-fit: contain !important;
+                        background-size: contain !important;
+                        background-repeat: no-repeat;" 
+                        [style.background-image]="'url(' + baseUrl + item.firstvizavatar + ')'"></div>
+                      </article>
+                    </div>
+                </div>
+          </div>
+          <div style="width:100%;text-align:left;">
+              <div>
+                  <div style="float:left">
+                      <img src="assets/custom-img/silvermedal.png" style="width:30px;height:51px;"  />
+                  </div>
+                  <div class="slide">
+                      <article class="row g-bg-white mx-0">
+                          <h4 class="h3 g-font-weight-300 g-mb-20" style="width:100%">
+                              <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.second_viz_id}">{{item.secondtitle}}</a>
+                           </h4>  
+                        <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                          
+                          <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.secondavatar}}">
+                          <a href="/bio/{{item.second_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.secondusername}}</strong></span></a>
+                        </div>
+                        <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                        height: 160px !important;
+                        object-fit: contain !important;
+                        background-size: contain !important;
+                        background-repeat: no-repeat;" 
+                        [style.background-image]="'url(' + baseUrl + item.secondvizavatar + ')'"></div>
+                      </article>
+                    </div>
+                </div>
+          </div>  
+          <div style="width:100%;text-align:left;">
+              <div>
+              <div style="float:left">
+                  <img src="assets/custom-img/bronzemedal.png" style="width:30px;height:51px;"/>
+              </div>
+              <div class="slide">
+                  <article class="row g-bg-white mx-0">
+                      <h4 class="h3 g-font-weight-300 g-mb-20"  style="width:100%">
+                          <a class="ttl g-color-black g-font-size-20 g-font-weight-300" [routerLink]="['/visual']" [queryParams]="{id: item.third_viz_id}">{{item.thirdtitle}}</a>
+                       </h4>  
+                    <div class="col-md-5 col-lg-5 g-pa-1 text-center">
+                      
+                      <img class="d-inline-block g-width-60 g-height-60 g-brd-around g-brd-3 g-brd-white rounded-circle g-mb-20" src="{{baseUrl}}{{item.thirdavatar}}">
+                      <a href="/bio/{{item.third_user_id}}"><span class="d-block g-color-black g-font-size-17 g-mb-20"><strong>{{item.thirdusername}}</strong></span></a>
+                    </div>
+                    <div class="col-md-7 col-lg-7 g-bg-size-cover" style="width: 100% !important;
+                    height: 160px !important;
+                    object-fit: contain !important;
+                    background-size: contain !important;
+                    background-repeat: no-repeat;" 
+                    [style.background-image]="'url(' + baseUrl + item.thirdvizavatar + ')'"></div>
+                  </article>
+                </div>
+              </div>
+          </div>
+        </div>
       <div class="text-center mb-5" style="float: left;
       width: 70%;
       padding-left: 33%;">
