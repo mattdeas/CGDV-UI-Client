@@ -146,6 +146,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   setTitle( newTitle: string) {
-    this.titleService.setTitle( newTitle + ' - QED Group LLC');
+    //this.titleService.setTitle( newTitle + ' - QED Group LLC');
+    this.titleService.setTitle('CGDV-Center for Global Data Visualization');
   }
 }
