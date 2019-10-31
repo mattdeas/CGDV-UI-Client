@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { VisualService } from '../../services/visual.service';
 import { CMSService } from '../../services/cms.service';
@@ -8,10 +8,17 @@ import { AppComponent } from '../../app.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ChallengeService} from '../../services/challenge.service';
 // import * as Typed from 'typed.js';
 declare  var Typed:any;
 import "../../../assets/vendor/typedjs/typed.min.js";
+import { any } from 'prop-types';
 declare var $: any;
+
+export interface DialogData {
+  URLPath: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +30,7 @@ export class DashboardComponent {
   deviceInfo = null;
   baseUrl = environment.baseUrl;
   featuredList: any = [];
+  Challengerows = [];
   homeCMS: any = {};
   statistics: any = {};
   users: number;
@@ -39,7 +47,8 @@ export class DashboardComponent {
               public commonService: CommonService,
               private deviceService: DeviceDetectorService,
               public appComponent: AppComponent,private _sanitizer: DomSanitizer,
-              private http:HttpClient
+              public challengeService: ChallengeService,
+              private http:HttpClient, public dialog:MatDialog
     ) {
     this.epicFunction();
   }
@@ -62,21 +71,14 @@ export class DashboardComponent {
     this.getCMSContent();
     this.getStats();
 
-    let headers = new HttpHeaders().set('access-control-allow-origin',"https://api.ipify.org");
-    //headers.get('https://api.ipify.org?format=json');
-    console.log('1');
-    //console.log(headers.get('https://api.ipify.org?format=json').length);
-    this.http.get('https://api.ipify.org?format=json', { headers }).subscribe(data => {
-      this.publicIP=data['ip'];
-    });
-    //this.http.get('https://api.ipify.org?format=json').subscribe(data => {
-    //  this.publicIP=data['ip'];
-    //});
-    console.log(this.publicIP);
     this.innerWidth = window.innerWidth;
     this.innerHeight = window.innerHeight;
-    console.log(this.innerHeight);
+    if(this.innerWidth > 1000) //Only show on non Mobile
+    { 
+      this.openDialog();
+    }
 
+    
     
     
   }
@@ -93,6 +95,78 @@ export class DashboardComponent {
     console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
   }
    
+  openDialog(): void {
+    let url = '?recordPerPage=20&page=1';// + pageNo;    
+    this.challengeService.getChallenge(url).subscribe((res: any) => {
+      //     this.loading = false;
+           if (res.status === 0) {
+             return false;
+           }
+           if(res.status){
+             this.Challengerows = res.result.data;
+             console.log(this.Challengerows);
+             
+             if(this.Challengerows.length > 0)
+              {
+                for(var i = 0; i < this.Challengerows.length; i += 1) {
+                  
+                  if(this.Challengerows[i].notificationshow == 0) 
+                    {
+                      this.Challengerows.splice(i,1);
+                      i = i - 1;
+                    }
+                  else
+                  {
+                    var EndDate;
+                    EndDate = new Date(this.Challengerows[0].end);
+                    var Today;
+                     Today = new Date();
+                     var dayDif = (EndDate - Today)  / 1000 / 60 / 60 / 24;
+                     console.log(Today);
+                     console.log(EndDate);
+                     console.log(dayDif);
+                     if(dayDif > 5){
+                      this.Challengerows.splice(i,1);
+                      i = i - 1;
+                     }
+                  }
+                }
+              }
+            
+              if(this.Challengerows.length > 0)
+              {   console.log(this.Challengerows[this.Challengerows.length - 1].embedded_path);
+                  var trustURL = this.Challengerows[this.Challengerows.length - 1].embedded_path;
+                 const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+                  width: '70%', height: '900px',
+                  data: {URLPath: trustURL  }
+                 });
+              }
+
+           }
+        },
+         (error) => {        
+           this.appComponent.showError(error);
+    });
+    
+
+    // this.commonService.getChallengeList('')
+    //   .subscribe((res: any) => {
+    //     if(res.status){
+    //       console.log(res);
+    //     }
+    //   },
+    //   (error) => {        
+    //     // this.appcomponent.showError(error);
+    //   });
+
+
+    // const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    //   width: '70%', height: '800px'
+    // });
+
+   
+  }
+
 
 
   
@@ -204,6 +278,7 @@ export class DashboardComponent {
   }
 
 	ngAfterViewInit() {
+     
     this.doJqueryLoad();     
     /* $('.count').each(function () {
       $(this).prop('Counter',0).animate({
@@ -216,7 +291,7 @@ export class DashboardComponent {
           }
       });
     });  */
-         
+     
   }
 
   // You don't need to use document.ready... 
@@ -243,4 +318,39 @@ export class DashboardComponent {
       // initialization of go to
       $.HSCore.components.HSGoTo.init('.js-go-to');
   }
+}
+
+
+
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  URLPath: any;
+  //constructor(
+  //  public dialogRef: MatDialogRef<DialogOverviewExampleDialog>
+  //  ) {}
+  constructor(
+      public sanitizer: DomSanitizer,
+      public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: any) {
+        //this.URLPath = this.sanitizer.bypassSecurityTrustResourceUrl(data.URLPath);
+       //  = data.URLPath;
+
+      }
+
+  ngOnInit() {
+    
+  }
+  
+  ngAfterViewInit() {
+  
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

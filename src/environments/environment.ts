@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //baseUrl: 'http://localhost:8080/' // local
-  baseUrl: 'https://www.centerforglobaldata.org:8080/'
+  baseUrl: 'http://localhost:8080/' // local
+  //baseUrl: 'https://www.centerforglobaldata.org:8080/'
  // baseUrl: 'http://34.205.15.39:8080/'
 };
 

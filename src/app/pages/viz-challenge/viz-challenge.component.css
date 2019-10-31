@@ -12,7 +12,7 @@
 .wrapper {
   margin: 50px auto;
   width: 95%;
-  height: 500px;
+  height: 600px;
   background: white;
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
@@ -20,6 +20,8 @@
   box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
   position: relative;
   z-index: 90;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .wrappermobile {
@@ -130,4 +132,56 @@ img {
 
 .ribbon-green:before {
   left: 0;
+}
+
+#general {
+
+  width: 100%;
+  min-height: 10vh !important;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  z-index: -200;
+
+}
+
+#home {
+
+  min-height: 10vh;
+
+}
+
+#about {
+
+  min-height: 10vh;
+
+}
+
+
+main {
+
+  /*
+    height: 100vh; 
+    min-height: 100% !important; 
+  */
+  height: 100%;
+  min-height: 10vh;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+  overflow: auto;
+  border: 3px solid black;
+
+}
+
+.main {
+  width: 80%;
+  padding: 40px;
+  resize: both;
+  overflow: visible;
+  text-align: center;
 }

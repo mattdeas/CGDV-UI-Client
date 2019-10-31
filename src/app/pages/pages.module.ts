@@ -30,8 +30,11 @@ import {MatCardModule} from '@angular/material/card';
 import { GuidelinesComponent } from './guidelines/guidelines.component';
 import { GuideComponent } from './guide/guide.component';
 import {MatChip, MatChipsModule, MatChipList} from '@angular/material/chips';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogModule} from '@angular/material';
 import {MatIconModule, MatIcon} from '@angular/material/icon';
 import { LZStringModule, LZStringService } from 'ng-lz-string';
+import { DialogOverviewExampleDialog } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -47,6 +50,7 @@ import { LZStringModule, LZStringService } from 'ng-lz-string';
     MatChipsModule,
     MatIconModule,
     LZStringModule,
+    MatDialogModule
     
   ],
   declarations: [
@@ -68,13 +72,15 @@ import { LZStringModule, LZStringService } from 'ng-lz-string';
     GuidelinesComponent,
     GuideComponent,
     VisualPreviewComponent,
+    DialogOverviewExampleDialog
     
     
   ],
   providers: [
     // Specify the service in the providers section
     LZStringService
-  ]
+  ],
+  entryComponents: [DialogOverviewExampleDialog]
 })
 
 export class PagesModule {}

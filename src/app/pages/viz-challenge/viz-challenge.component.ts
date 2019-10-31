@@ -105,13 +105,17 @@ today: string ;
     //          (filterData.university_id ? ('&university_id=' + filterData.university_id) : '') +
               //(filterData.country_id ? ('&country_id=' + filterData.country_id) : '') 
     //}
+    console.log('testurl');
+    console.log(url);
     this.challengeService.getChallenge(url).subscribe((res: any) => {
         this.loading = false;
         if (res.status === 0) {
           return false;
         }
         if(res.status){
+
           this.rows = res.result.data;
+          console.log(this.rows);
           this.data.count = res.result.count;
           this.data.currentPage = res.result.currentPage;
           // this.setPage(this.page);

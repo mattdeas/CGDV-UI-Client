@@ -1,4 +1,21 @@
-<div [ngClass]="{'wrapper': innerWidth>1000, 'wrappermobile':innerWidth < 1000 }" *ngFor="let item of rows">
+<div id="challengediv" [ngClass]="{'wrapper': innerWidth>1000, 'wrappermobile':innerWidth < 1000 }"  *ngFor="let item of rows">
+    <!-- <div id="general">
+      <div id="home">
+        <main>
+          <div class="main" id="home_main">
+            <h1 id="head_home">Matthew</h1>
+            <h3 id="tag_home">Why do you hate CSS</h3>
+          </div>
+        </main>
+      </div>
+    <div id="about">
+      <main>
+        <div class="main">
+          <h1 id="head_about">Things</h1>
+          <p id="para_about">Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble Wibble wibble tribble trouble wibble wibble</p>
+        </div>
+      </main>
+    </div> -->
     <div  *ngIf="item.openclose" class="ribbon-wrapper-green">
       <div class="ribbon-green" >ACTIVE</div></div>
     <div *ngIf="!item.openclose" class="ribbon-wrapper-green">      
@@ -7,7 +24,8 @@
     <div style="font-size:25px;text-align: center"><strong>{{item.challenge_name}}</strong></div>
     <div style="text-align: right;padding-right: 5%;">Active From <strong>{{item.start}}</strong> to <strong>{{item.end}}</strong></div>
     <div style="text-align: center; position: relative; bottom: 0;"><p>{{item.challenge_description}}</p></div>
-    <div *ngIf="!item.openclose" style="width:97%;padding-left:5px">
+    <div *ngIf="item.embedded_img_local.length > 0" style="text-align: center; position: relative; bottom: 0;"><img style="width:70%" src="{{baseUrl}}{{item.embedded_img_local}}"/></div>
+    <div *ngIf="!item.openclose"  style="width:97%;padding-left:5px">
       <div style="width:100%" *ngIf="innerWidth>1000">
         <div style="float: left;width:33.33333%;text-align:left;">
             <div>

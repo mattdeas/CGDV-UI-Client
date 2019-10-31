@@ -158,6 +158,7 @@ export class SignupComponent implements OnInit {
       $("#myModal").modal('show');
       this.model.university_id = undefined;
     }
+
   }
   loadUniversity(){
     this.commonService.getUniversityList('')
@@ -171,14 +172,18 @@ export class SignupComponent implements OnInit {
       });
   }
   add_uni(f1){
+    console.log('Uni Added =');
+    console.log(f1.form.value);
     this.commonService.addUniversity(f1.form.value)
       .subscribe((res: any) => {
+        console.log(res);
         if(res.status){
           this.appcomponent.showSuccess(res.message);
           this.loadUniversity();
           f1.submitted = false;
           f1.reset();
           $("#myModal").modal('hide');
+          this.model.university_id = res.result[0].id;
         }else{
           this.appcomponent.showError(res.message);
         }
